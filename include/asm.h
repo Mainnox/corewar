@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:11:54 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/27 02:15:43 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/27 04:12:13 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define NAME_CMD_STRING	".name"
 # define USAGE				"usage: ./asm champion.s"
 # define COMMENT_CHAR 		'#'
+# define COMMENT_CMD_STRING	".comment"
 
 # include "../libft/includes/libft.h"
 
@@ -33,11 +34,18 @@ typedef struct					s_asm
 void							error_ac(void);
 void							error_open(void);
 void							error_name(void);
+void							error_comment(void);
 
 /*
 **			Parsing_functions
 */
 
 int							parsing(t_asm *handle);
+
+/*
+**			Test_functions
+*/
+
+void							test_handle(t_asm *handle);
 
 #endif

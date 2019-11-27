@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/27 01:03:42 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/27 04:15:07 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int				main(int ac, char **av)
 	if (handle.fd_read < 2)
 		error_open();
 	parsing(&handle);
+	test_handle(&handle);
 	close(handle.fd_read);
 	return (0);
 }

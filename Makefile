@@ -6,7 +6,7 @@
 #    By: akremer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/19 14:26:56 by akremer           #+#    #+#              #
-#    Updated: 2019/11/27 02:15:41 by akremer          ###   ########.fr        #
+#    Updated: 2019/11/27 03:47:35 by akremer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ LIB = libft/libftprintf.a
 
 SRC =		srcs_asm/main.c						\
 			srcs_asm/error.c					\
-			srcs_asm/parsing.c					
+			srcs_asm/parsing.c					\
+			srcs_asm/test.c
 
 OBJ = $(SRC:%.c=%.o)
 
