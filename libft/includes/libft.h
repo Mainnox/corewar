@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 10:32:32 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/14 06:05:15 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/27 01:38:03 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int					ft_tabchr(int *tab, int rififi, int limit);
 int					ft_tabcmp(int *tab, int *tab2, int limit);
 void				ft_tabcpy(int *src, int *dest, int limit);
 char				**ft_split_whitespace(char *str);
-void				ft_freesplit(char **split);
+int					ft_freesplit(char **split);
 int					ft_splitlen(char **white);
 int					ft_strcount(char *str, char c);
 int					ft_nbrlen_clas(int nb);

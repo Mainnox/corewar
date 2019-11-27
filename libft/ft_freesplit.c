@@ -6,13 +6,13 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 09:27:27 by akremer           #+#    #+#             */
-/*   Updated: 2019/08/31 14:30:09 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/27 01:37:28 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void			ft_freesplit(char **split)
+int				ft_freesplit(char **split)
 {
 	int			i;
 
@@ -23,4 +23,5 @@ void			ft_freesplit(char **split)
 		i++;
 	}
 	free(split);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 13:39:19 by akremer           #+#    #+#             */
-/*   Updated: 2019/05/20 11:18:21 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/26 23:37:50 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void		ft_bzero(void *s, size_t n)
 {
 	size_t	i;
-	int		*ns;
+	char	*ns;
 
-	ns = (int*)s;
+	ns = (char*)s;
 	i = -1;
 	while (++i < n)
 		ns[i] = 0;
