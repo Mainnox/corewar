@@ -3,28 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lyhamrou <lyhamrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 17:53:25 by akremer           #+#    #+#             */
-/*   Updated: 2019/03/19 08:40:31 by akremer          ###   ########.fr       */
+/*   Created: 2018/11/12 20:32:19 by lyhamrou          #+#    #+#             */
+/*   Updated: 2019/01/09 19:12:06 by lyhamrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-void	ft_putnbr(int nb)
+static int		lim_of_neg(int n)
 {
-	if (nb == -2147483648)
-		ft_putstr("-2147483648");
-	else
+	ft_putchar('-');
+	ft_putchar('2');
+	n = n % 1000000000;
+	return (n);
+}
+
+void			ft_putnbr(int n)
+{
+	if (n == -2147483648)
+		n = -lim_of_neg(n);
+	if (n < 0)
 	{
-		if (nb < 0)
-		{
-			ft_putchar('-');
-			nb = -nb;
-		}
-		if (nb >= 10)
-			ft_putnbr(nb / 10);
-		ft_putchar(nb % 10 + 48);
+		ft_putchar('-');
+		n = -n;
+	}
+	if (n >= 0 && n < 10)
+		ft_putchar(n + '0');
+	if (n >= 10)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
 	}
 }

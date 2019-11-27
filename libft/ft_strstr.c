@@ -3,34 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lyhamrou <lyhamrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 10:37:39 by akremer           #+#    #+#             */
-/*   Updated: 2019/03/23 20:25:48 by akremer          ###   ########.fr       */
+/*   Created: 2018/11/09 18:09:16 by lyhamrou          #+#    #+#             */
+/*   Updated: 2018/11/09 18:11:13 by lyhamrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-char		*ft_strstr(const char *s, const char *to)
+char	*ft_strstr(char const *s1, char const *s2)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
-	char	*to_find;
+	int i;
+	int j;
 
-	str = (char*)s;
-	to_find = (char*)to;
 	i = 0;
-	if (ft_strlen(to_find) == 0)
-		return (str);
-	while (str[i])
+	if (!s2[i])
+		return ((char *)s1);
+	if (ft_strlen(s1) < ft_strlen(s2))
+		return (NULL);
+	while (s1[i])
 	{
 		j = 0;
-		while (str[i + j] == to_find[j])
+		while (s1[i + j] == s2[j] && s2[j])
 		{
-			if (j == ft_strlen(to_find) - 1)
-				return (str + i);
+			if (!s2[j + 1])
+				return ((char *)s1 + i);
 			j++;
 		}
 		i++;

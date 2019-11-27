@@ -3,67 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 14:36:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/06/20 17:00:45 by akremer          ###   ########.fr       */
+/*   Created: 2018/11/29 00:23:23 by lyhamrou          #+#    #+#             */
+/*   Updated: 2019/06/20 18:57:08 by lyhamrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/get_next_line.h"
+#include "get_next_line.h"
 
-static int			full_line(char **scrap, char **line, int fd, int ret)
+static int	new_line(char **line, char **str, int const fd, int ret)
 {
-	char	*tmp;
 	size_t	i;
+	char	*tmp;
 
 	i = 0;
-	while (scrap[fd][i] != '\n' && scrap[fd][i] != '\0')
+	while (str[fd][i] != '\n' && str[fd][i] != '\0')
 		i++;
-	if (scrap[fd][i] == '\n')
+	if (str[fd][i] == '\n')
 	{
-		*line = ft_strndup(scrap[fd], i);
-		tmp = ft_strdup(scrap[fd] + i + 1);
-		free(scrap[fd]);
-		scrap[fd] = tmp;
-		if (scrap[fd][0] == '\0')
-			ft_strdel(&scrap[fd]);
+		*line = ft_strsub(str[fd], 0, i + 1);
+		tmp = ft_strdup(str[fd] + i + 1);
+		free(str[fd]);
+		str[fd] = tmp;
+		if (str[fd] == NULL || str[fd][0] == '\0')
+			ft_strdel(&str[fd]);
 	}
-	else if (scrap[fd][i] == '\0')
+	else if (str[fd][i] == '\0')
 	{
 		if (ret == BUFF_SIZE)
 			return (get_next_line(fd, line));
-		*line = ft_strdup(scrap[fd]);
-		ft_strdel(&scrap[fd]);
+		*line = ft_strdup(str[fd]);
+		ft_strdel(&str[fd]);
 	}
 	return (1);
 }
 
-int					get_next_line(const int fd, char **line)
+int			get_next_line(int const fd, char **line)
 {
-	static char	*scrap[4864];
-	char		*buf;
+	static char	*str[4864];
 	char		*tmp;
+	char		*buf;
 	int			ret;
 
-	buf = ft_memalloc(BUFF_SIZE + 1);
-	if (fd < 0 || fd > 4864 || line == NULL || BUFF_SIZE == 0)
+	if (fd < 0)
 		return (-1);
+	buf = ft_memalloc(BUFF_SIZE + 1);
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		if (scrap[fd] == NULL)
-			scrap[fd] = ft_strnew(1);
-		tmp = ft_strjoin(scrap[fd], buf);
-		free(scrap[fd]);
-		scrap[fd] = tmp;
-		if (ft_strchr(buf, '\n'))
+		if (!str[fd])
+			str[fd] = ft_strnew(0);
+		tmp = ft_strjoin(str[fd], buf);
+		free(str[fd]);
+		str[fd] = tmp;
+		if (ft_strchr(str[fd], '\n'))
 			break ;
 	}
 	free(buf);
 	if (ret < 0)
 		return (-1);
-	if (ret == 0 && (scrap[fd] == NULL || scrap[fd][0] == '\0'))
+	else if (ret == 0 && str[fd] == NULL)
 		return (0);
-	return (full_line(scrap, line, fd, ret));
+	return (new_line(line, str, fd, ret));
 }

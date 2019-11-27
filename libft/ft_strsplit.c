@@ -3,91 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lyhamrou <lyhamrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 15:15:11 by akremer           #+#    #+#             */
-/*   Updated: 2019/08/27 15:05:27 by akremer          ###   ########.fr       */
+/*   Created: 2018/11/12 20:14:49 by lyhamrou          #+#    #+#             */
+/*   Updated: 2018/12/12 14:59:25 by lyhamrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-static int		compte_mot(char *str, char c)
+static unsigned long	words(char const *s, char c)
 {
-	int i;
-	int word;
-
-	i = 0;
-	word = 0;
-	while (str[i])
-	{
-		while (str[i] == c)
-			i++;
-		if (str[i] != c)
-			word++;
-		while (str[i] && (str[i] != c))
-			i++;
-	}
-	return (word);
-}
-
-static int		ft_s(char *str, char c)
-{
-	int i;
-
-	i = 0;
-	while (str[i] && (str[i] != c))
-		i++;
-	return (i);
-}
-
-static int		ft_strcpyy(char *tab, char *str, int i, char c)
-{
-	int j;
-
-	j = 0;
-	while (str[i] && (str[i] != c))
-	{
-		tab[j] = str[i];
-		i++;
-		j++;
-	}
-	tab[j] = '\0';
-	return (i);
-}
-
-static int		ft_skipc(int i, char c, char *str)
-{
-	while (str[i] == c)
-		i++;
-	return (i);
-}
-
-char			**ft_strsplit(const char *s, char c)
-{
-	char		**tab;
-	int			j;
 	int			i;
-	char		*str;
+	int			cpt;
 
-	str = (char*)s;
 	i = 0;
-	j = 0;
-	if (!s)
-		return (NULL);
-	if (!(tab = (char**)malloc(sizeof(char*) * compte_mot(str, c) + 1)))
-		return (NULL);
-	while (str[i])
+	cpt = 0;
+	while (s[i])
 	{
-		i = ft_skipc(i, c, str);
-		if (str[i])
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		if (s[i] != c)
+			cpt++;
+		while (s[i] != c && s[i] != '\0')
+			i++;
+	}
+	return (cpt);
+}
+
+static unsigned long	letter(char const *s, int start, char c)
+{
+	int			i;
+
+	i = 0;
+	while (s[start] != c && s[start])
+	{
+		start++;
+		i++;
+	}
+	return (i);
+}
+
+char					**ft_strsplit(char const *s, char c)
+{
+	char			**wds;
+	unsigned int	i;
+	unsigned int	x;
+
+	i = 0;
+	x = 0;
+	if (!s || !c || !(wds = (char **)malloc(sizeof(char *) * words(s, c) + 1)))
+		return (NULL);
+	while (s[x])
+	{
+		while (s[x] == c && s[x])
+			x++;
+		if (s[x])
 		{
-			if (!(tab[j] = (char*)malloc(sizeof(char) * ft_s(&str[i], c) + 1)))
+			if (!(wds[i] = ft_strsub(s, x, letter(s, x, c))))
 				return (NULL);
-			i = ft_strcpyy(tab[j], str, i, c);
-			j++;
+			while (s[x] != c && s[x])
+				x++;
+			i++;
 		}
 	}
-	tab[j] = 0;
-	return (tab);
+	wds[i] = NULL;
+	return (wds);
 }

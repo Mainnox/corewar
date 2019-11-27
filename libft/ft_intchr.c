@@ -6,11 +6,11 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 16:40:05 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/10/01 16:04:53 by lyhamrou         ###   ########.fr       */
+/*   Updated: 2019/02/26 17:08:38 by lyhamrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 int		ft_intchr(char const *s, char const *accept)
 {

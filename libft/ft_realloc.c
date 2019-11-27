@@ -3,28 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lyhamrou <lyhamrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 16:44:05 by akremer           #+#    #+#             */
-/*   Updated: 2019/03/20 13:01:55 by akremer          ###   ########.fr       */
+/*   Created: 2018/11/19 19:34:10 by lyhamrou          #+#    #+#             */
+/*   Updated: 2019/01/08 12:47:15 by lyhamrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-void		*ft_realloc(void *ptr, size_t size)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	void	*new;
-	int		i;
+	char *str;
 
-	i = 0;
-	new = NULL;
-	if (!ptr && size)
-		return (ft_memalloc(size));
-	if (size)
+	if (size == 0)
 	{
-		new = ft_memalloc(size);
-		new = ptr;
+		str = ft_strdup((char *)ptr);
+		free(ptr);
+		return ((void *)str);
 	}
-	return (new);
+	if (!(ptr = malloc(size)))
+		if (!(str = (char *)malloc(sizeof(char) * size)))
+			return (NULL);
+	return (NULL);
 }
