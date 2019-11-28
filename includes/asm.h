@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/11/28 17:20:30 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/28 19:48:19 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct 				s_asm
 {
 	char					odd;
 	char					size_magic;
+	char					size_prog_size;
 	int						fd_read;
 	int						fd_write;
 	char					*av;
@@ -54,7 +55,7 @@ int							parsing(t_asm *handle);
 */
 
 void						print_cor(t_asm *handle);
-void						print_hex_fd(t_asm *handle, unsigned int nb, int fd);
+void						print_hex_fd(t_asm *handle, unsigned int nb, char size, char odd);
 
 /*
 **							open_functions

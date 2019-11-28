@@ -6,39 +6,33 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:54:16 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/28 17:45:41 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/28 20:33:10 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static void		print_magic(t_asm *handle)
+void			print_hex_fd(t_asm *handle, unsigned int nb, char size, char odd)
 {
-	char				magic[handle->size_magic + 1];
+	char				tab[size + 1];
 	int					i;
 	unsigned int		tmp;
 
 	tmp = 0;
 	i = -1;
-	ft_bzero(magic, sizeof(magic));
-	while (++i < handle->size_magic)
+	ft_bzero(tab, sizeof(tab));
+	while (++i < size)
 	{
-		magic[i] = handle->header.magic % 16;
-		handle->header.magic /= 16;
+		tab[i] = nb % 16;
+		nb /= 16;
 	}
-	ft_strrev(magic);
+	ft_strrev(tab);
 	i = 0;
-	while (i < handle->size_magic)
+	if (odd)
+		write(handle->fd_write, &tab[i++], 1);
+	while (tab[i])
 	{
-		ft_printf("magic[%d] = %hhx\n", i, magic[i]);
-		i++;
-	}
-	i = 0;
-	if (handle->odd)
-		write(handle->fd_write, &magic[i], 1);
-	while (magic[i])
-	{
-		tmp = tmp * 16 + magic[i];
+		tmp = tmp * 16 + tab[i];
 		ft_printf("tmp a i = %d = %x\n", i, tmp);
 		if (tmp >= 16)
 		{
@@ -53,7 +47,9 @@ void			print_cor(t_asm *handle)
 {
 	char		zero;
 	char		tmp;
+	char		i;
 
+	i = 0;
 	zero = 0;
 	tmp = handle->size_magic;
 	while (4 - tmp / 2)
@@ -61,15 +57,13 @@ void			print_cor(t_asm *handle)
 		write(handle->fd_write, &zero, 1);
 		tmp += 2;
 	}
-	print_magic(handle);
+	print_hex_fd(handle, handle->header.magic, handle->size_magic, handle->odd);
 	write(handle->fd_write, &handle->header.prog_name, sizeof(handle->header.prog_name));
-	write(handle->fd_write, &handle->header.prog_size, sizeof(unsigned int));
+	while (++i < 7)
+		write(handle->fd_write, &zero, sizeof(char));
+	print_hex_fd(handle, handle->header.prog_size, handle->size_prog_size, (handle->size_prog_size / 2) ? 0 : 1);
 	write(handle->fd_write, &handle->header.comment, sizeof(handle->header.comment));
+	while (++i < 11)
+		write(handle->fd_write, &zero, sizeof(char));
 }
 
-void			print_hex_fd(t_asm *handle, unsigned int nb, int fd)
-{
-	if (nb >= 16)
-		print_hex_fd(handle, nb / 16, fd);
-	ft_putchar_fd(nb % 16, handle->fd_write);
-}
