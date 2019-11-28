@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:46:17 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/28 12:45:29 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/28 14:30:50 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ static int		parse_name(t_asm *handle, char *buf)
 	len_name = ft_strclen(buf, '\"');
 	if (len_name == ft_strlen(buf))
 		return (1);
-	handle->name = ft_strndup(buf, len_name);
+	ft_strncpy(handle->header.prog_name, buf, len_name);
 	i = len_name + 1;
 	while (buf[i] == 't' || buf[i] == ' ')
 		i++;
 	if (buf[i] == '\0' || buf[i] == COMMENT_CHAR)
 		return (0);
-	free(handle->name);
 	return (1);
 }
 
@@ -60,14 +59,12 @@ static int		parse_comment(t_asm *handle, char *buf)
 	len_name = ft_strclen(buf, '\"');
 	if (len_name == ft_strlen(buf))
 		return (1);
-	handle->comment = ft_strndup(buf, len_name);
+	ft_strncpy(handle->header.comment, buf, len_name);
 	i = len_name + 1;
 	while (buf[i] == 't' || buf[i] == ' ')
 		i++;
 	if (buf[i] == '\0' || buf[i] == COMMENT_CHAR)
 		return (0);
-	free(handle->comment);
-	free(handle->name);
 	return (1);
 }
 
@@ -79,17 +76,18 @@ int				parsing(t_asm *handle)
 	{
 		if (buf[0] == '\0' && ft_strdel(&buf))
 			continue ;
-		if (!handle->name)
+		if (handle->header.prog_name[0] == '\n')
 		{
 			if (parse_name(handle, buf) && ft_strdel(&buf))
 				error_name();
 			ft_strdel(&buf);
 			continue ;
 		}
-		if (handle->name && !handle->comment)
+		if (handle->header.prog_name[0] != '\n' && handle->header.comment[0] == '\n')
 			if (parse_comment(handle, buf) && ft_strdel(&buf))
 				error_comment();
 		ft_strdel(&buf);
 	}
+	ft_printf("Le truc bizarre = %d\n", (int)handle->header.prog_name[8]);
 	return (1);
 }

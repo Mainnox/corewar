@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/28 13:31:52 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/28 15:33:00 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 static void		init_handle(t_asm *handle, char *av)
 {
+	header_t		header;
+
+	header.prog_size = 0;
+	ft_bzero(header.prog_name, sizeof(header.prog_name));
+	header.prog_name[0] = '\n';
+	ft_bzero(header.comment, sizeof(header.comment));
+	header.comment[0] = '\n';
+	header.magic = COREWAR_EXEC_MAGIC;
+	handle->header = header;
 	handle->fd_read = 0;
-	handle->name = NULL;
-	handle->comment = NULL;
 	handle->bin = NULL;
 	handle->fd_write = 0;
 	handle->av = av;
@@ -35,6 +42,8 @@ int				main(int ac, char **av)
 		error_open();
 	parsing(&handle);
 	test_handle(&handle);
+	print_cor(&handle);
 	close(handle.fd_read);
+	close(handle.fd_write);
 	return (0);
 }
