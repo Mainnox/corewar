@@ -3,37 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyhamrou <lyhamrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 20:18:20 by lyhamrou          #+#    #+#             */
-/*   Updated: 2018/11/13 18:18:58 by lyhamrou         ###   ########.fr       */
+/*   Created: 2018/11/13 17:56:58 by akremer           #+#    #+#             */
+/*   Updated: 2019/03/19 08:42:22 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-char		*ft_strndup(char const *str, size_t n)
+char	*ft_strndup(const char *str, size_t n)
 {
 	size_t	i;
-	char	*dest;
+	char	*tab;
+	size_t	len;
 
-	i = 0;
-	dest = NULL;
-	if ((size_t)ft_strlen(str) < n)
-	{
-		if (!(dest = (char *)malloc(sizeof(char) * ft_strlen(str) + 1)))
-			return (NULL);
-	}
+	if (ft_strlen(str) > n)
+		len = n;
 	else
-	{
-		if (!(dest = (char *)malloc(sizeof(char) * n + 1)))
-			return (NULL);
-	}
+		len = ft_strlen(str);
+	if (!(tab = (char*)malloc(sizeof(*str) * (len + 1))))
+		return (NULL);
+	i = 0;
 	while (str[i] && i < n)
 	{
-		dest[i] = str[i];
+		tab[i] = str[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	tab[i] = '\0';
+	return (tab);
 }

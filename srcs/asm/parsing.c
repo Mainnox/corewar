@@ -6,16 +6,16 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:46:17 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/27 04:18:41 by akremer          ###   ########.fr       */
+/*   Updated: 2019/11/28 12:45:29 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/asm.h"
+#include "asm.h"
 
 static int		parse_name(t_asm *handle, char *buf)
 {
-	int			i;
-	int			len_name;
+	int				i;
+	size_t			len_name;
 
 	i = 0;
 	while (buf[i] == '\t' || buf[i] == ' ')
@@ -44,7 +44,7 @@ static int		parse_name(t_asm *handle, char *buf)
 static int		parse_comment(t_asm *handle, char *buf)
 {
 	int			i;
-	int			len_name;
+	size_t		len_name;
 
 	i = 0;
 	while (buf[i] == '\t' || buf[i] == ' ')

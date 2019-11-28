@@ -3,57 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyhamrou <lyhamrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 15:51:40 by lyhamrou          #+#    #+#             */
-/*   Updated: 2018/12/26 18:09:49 by lyhamrou         ###   ########.fr       */
+/*   Created: 2018/11/10 15:33:44 by akremer           #+#    #+#             */
+/*   Updated: 2019/03/19 08:38:53 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-static int		howmany_num(int n)
+static int	ft_taillenbr(int n)
 {
-	int			i;
+	int i;
 
-	i = 1;
-	if (n == -2147483648)
-		return (11);
+	i = 0;
 	if (n < 0)
 	{
 		i++;
 		n = -n;
 	}
-	while (n > 9)
+	while (n > 10)
 	{
 		n = n / 10;
 		i++;
 	}
-	return (i);
+	return (i + 1);
 }
 
-char			*ft_itoa(int n)
+static void	remplisage(int n, char *str, int neg)
 {
-	char		*itoa;
-	int			pow;
-	long		nb;
+	int i;
 
-	nb = n;
-	pow = howmany_num(n);
-	if (!(itoa = (char *)malloc(sizeof(char) * (unsigned long)pow + 1)))
+	i = 0;
+	while ((n * 10) / 10 != 0)
+	{
+		str[i] = n % 10 + 48;
+		i++;
+		n = n / 10;
+	}
+	if (neg == -1)
+	{
+		str[i] = '-';
+		i++;
+	}
+	str[i] = '\0';
+}
+
+char		*ft_itoa(int n)
+{
+	int		i;
+	char	*str;
+	int		neg;
+
+	neg = 1;
+	i = 0;
+	if (n == 0)
+		return (ft_strdup("0"));
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	if (!(str = (char*)malloc(sizeof(*str) * (ft_taillenbr(n) + 1))))
 		return (NULL);
-	itoa[pow--] = '\0';
-	if (nb < 0)
+	if (n < 0)
 	{
-		itoa[0] = '-';
-		nb = -nb;
+		neg = -1;
+		n = -n;
 	}
-	if (nb == 0)
-		*itoa = '0';
-	while (nb > 0)
-	{
-		itoa[pow--] = (nb % 10) + '0';
-		nb = nb / 10;
-	}
-	return (itoa);
+	remplisage(n, str, neg);
+	ft_strrev(str);
+	return (str);
 }

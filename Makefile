@@ -6,7 +6,7 @@
 #    By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 01:24:04 by lyhamrou          #+#    #+#              #
-#    Updated: 2019/11/27 05:50:35 by lyhamrou         ###   ########.fr        #
+#    Updated: 2019/11/28 13:31:48 by akremer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,12 @@ NAME_COR = corewar
 
 COMPILE = $(CC) -Wall -Wextra -Werror
 LD_LIBS = -lft -L libft/
-INCLUDES = -I includes/ -I libft/
+INCLUDES = -I includes/ -I libft/includes/
 HEADER = includes/*.h
 
 SRC_ASM_PATH = srcs/asm/
 SRC_COR_PATH = srcs/corewar/
-SRC_ASM_NAME = main_asm.c
+SRC_ASM_NAME = main.c error.c parsing.c test.c print.c open.c
 SRC_COR_NAME = main.c init.c parsing.c
 SRC_ASM = $(addprefix $(SRC_ASM_PATH),$(SRC_ASM_NAME))
 SRC_COR = $(addprefix $(SRC_COR_PATH),$(SRC_COR_NAME))

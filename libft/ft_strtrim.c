@@ -3,62 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyhamrou <lyhamrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 18:11:34 by lyhamrou          #+#    #+#             */
-/*   Updated: 2018/11/12 20:17:02 by lyhamrou         ###   ########.fr       */
+/*   Created: 2018/11/09 16:42:07 by akremer           #+#    #+#             */
+/*   Updated: 2019/08/27 14:01:02 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-static int		count(char const *str)
+static int	ft_fullblank(char *src)
 {
-	int			i;
-	int			cpt;
+	int i;
 
 	i = 0;
-	cpt = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+	while (src[i] == ' ' || src[i] == '\t' || src[i] == '\n')
 		i++;
-	if (str[i])
-	{
-		while (str[i])
-		{
-			i++;
-			cpt++;
-		}
-		while (str[i - 1] == ' ' || str[i - 1] == '\t' || str[i - 1] == '\n')
-		{
-			i--;
-			cpt--;
-		}
-	}
-	return (cpt);
+	if (src[i] == '\0')
+		return (1);
+	return (0);
 }
 
-char			*ft_strtrim(char const *s)
+static char	*ft_avancesrc(char *src)
 {
-	int			i;
-	int			x;
-	char		*str;
-	int			num;
+	int i;
 
 	i = 0;
-	x = 0;
-	str = NULL;
+	while (src[i] == ' ' || src[i] == '\t' || src[i] == '\n')
+		i++;
+	src = src + i;
+	return (src);
+}
+
+static char	*ft_destvide(void)
+{
+	char	*dest;
+
+	if (!(dest = (char*)malloc(sizeof(char) + 1)))
+		return (NULL);
+	dest[0] = '\0';
+	return (dest);
+}
+
+char		*ft_strtrim(char const *s)
+{
+	char		*dest;
+	char		*src;
+	int			i;
+	int			j;
+
+	j = 0;
+	src = (char*)s;
 	if (!s)
 		return (NULL);
-	num = count(s);
-	if (!(str = (char *)malloc(sizeof(char) * num + 1)))
+	if (ft_fullblank(src) == 1)
+		return (ft_destvide());
+	src = ft_avancesrc(src);
+	i = ft_strlen(src) - 1;
+	while (src[i] == ' ' || src[i] == '\t' || src[i] == '\n')
+		i--;
+	if (!(dest = (char*)malloc(sizeof(char) * i + 2)))
 		return (NULL);
-	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-		i++;
-	while (num > 0)
+	while (j <= i)
 	{
-		str[x++] = s[i++];
-		num--;
+		dest[j] = src[j];
+		j++;
 	}
-	str[x] = '\0';
-	return (str);
+	dest[j] = '\0';
+	return (dest);
 }

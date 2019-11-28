@@ -3,36 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyhamrou <lyhamrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 20:36:06 by lyhamrou          #+#    #+#             */
-/*   Updated: 2018/11/12 20:36:21 by lyhamrou         ###   ########.fr       */
+/*   Created: 2018/11/07 15:32:47 by akremer           #+#    #+#             */
+/*   Updated: 2019/03/19 08:39:26 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-void				*ft_memmove(void *dest, void const *src, size_t len)
+void		*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char	*src_uc;
-	unsigned char	*dest_uc;
-	size_t			i;
+	char	*ndest;
+	char	*nsrc;
+	size_t	i;
 
+	ndest = (char*)dest;
+	nsrc = (char*)src;
 	i = 0;
-	src_uc = (unsigned char *)src;
-	dest_uc = (unsigned char *)dest;
-	if (src_uc >= dest_uc)
+	if (ndest > nsrc)
+		while (n--)
+			ndest[n] = nsrc[n];
+	else
 	{
-		while (i < len)
+		while (i < n)
 		{
-			dest_uc[i] = src_uc[i];
+			ndest[i] = nsrc[i];
 			i++;
 		}
-	}
-	while (i < len)
-	{
-		dest_uc[len - 1 - i] = src_uc[len - 1 - i];
-		i++;
 	}
 	return (dest);
 }
