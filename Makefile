@@ -6,7 +6,7 @@
 #    By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 01:24:04 by lyhamrou          #+#    #+#              #
-#    Updated: 2019/12/01 19:06:28 by akremer          ###   ########.fr        #
+#    Updated: 2019/12/01 20:55:24 by akremer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ HEADER = includes/*.h
 SRC_ASM_PATH = srcs/asm/
 SRC_COR_PATH = srcs/corewar/
 SRC_ASM_NAME = main.c error.c parsing.c test.c print.c open.c parsing_instruc.c \
-			   check_parsing.c
+			   check_parsing.c op.c
 SRC_COR_NAME = main.c init.c parsing.c
 SRC_ASM = $(addprefix $(SRC_ASM_PATH),$(SRC_ASM_NAME))
 SRC_COR = $(addprefix $(SRC_COR_PATH),$(SRC_COR_NAME))

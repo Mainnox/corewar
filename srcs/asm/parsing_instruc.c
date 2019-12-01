@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:45:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/01 19:02:44 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/02 00:10:30 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,29 @@
 
 int					parse_instruc(t_asm *handle, char *buf)
 {
-	char		**split;
+	int		i;
+	t_inst	*new;
 
-	split = ft_strsplit(buf, SEPARATOR_CHAR);
-	ft_printf("ATTENTION LA VERITE: %x\n", -5);
+	i = 0;
+	if (!(new = (t_inst*)ft_memalloc(sizeof(t_inst))))
+		return (1);
+	ft_bzero(new, sizeof(t_inst));
+	while (ft_isblank(*buf))
+		buf++;
+	while (ft_strchr(LABEL_CHARS, buf[i]) != NULL)
+		i++;
+	if (buf[i] == LABEL_CHAR)
+	{
+		new->label = ft_strndup(buf, i);
+		buf += i + 1;
+		while (ft_isblank(*buf))
+			buf++;
+	}
+	i = 0;
+	while (ft_isalpha(buf[i]))
+		i++;
+	ft_printf("buf_act = %s\n", buf + i);
 	if (handle)
 		ft_printf("buf = %s\n", buf);
-	ft_freesplit(split);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/01 19:07:06 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/02 00:09:18 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@
 # include "libft.h"
 # include "op.h"
 
+typedef struct				s_arg
+{
+	char					type_arg;
+	int						valeur;
+	struct s_arg			*next;
+}							t_arg;
+
+typedef struct				s_inst
+{
+	char					opcode;
+	char					nb_arg;
+	char					*label;
+	char					*name;
+	t_arg					*arg;
+	struct s_inst			*next;
+}							t_inst;
 
 typedef struct 				s_asm
 {
@@ -26,6 +42,8 @@ typedef struct 				s_asm
 	int						fd_write;
 	char					*av;
 	char					*bin;
+	t_inst					*inst;
+	t_op					*op_tab;
 	header_t				header;
 }							t_asm;
 

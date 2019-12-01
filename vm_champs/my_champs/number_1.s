@@ -1,6 +1,7 @@
 .name "number_1"
 .comment "simple live"
 
-live %:live
-live %:live
-live:	aff r1
+			live:                  #tamer
+	live%:live
+		live%:live
+			sti r1, :live, %:live
