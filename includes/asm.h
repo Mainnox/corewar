@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/11/28 19:48:19 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/01 19:07:06 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define USAGE "Usage: ./asm champion.s"
 # include "libft.h"
 # include "op.h"
+
 
 typedef struct 				s_asm
 {
@@ -43,12 +44,20 @@ void						error_open(void);
 void						error_name(void);
 void						error_comment(void);
 void						error_malloc(void);
+void						error_instruc(void);
+
+/*
+**							check_functions
+*/
+
+int							check_blanc(char *buf);
 
 /*
 **							parsing_functions
 */
 
 int							parsing(t_asm *handle);
+int							parse_instruc(t_asm *handle, char *buf);
 
 /*
 ** 							print_functions

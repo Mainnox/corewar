@@ -1,4 +1,6 @@
 .name "number_1"
 .comment "simple live"
 
-live %10
+live %:live
+live %:live
+live:	aff r1

@@ -6,11 +6,17 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:17:58 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/28 13:12:04 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/01 14:49:17 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+void		error_instruc(void)
+{
+	ft_printf("bad instruction !\nWallah je vais faire un meilleur usage promis !\n%s\n", USAGE);
+	exit(0);
+}
 
 void		error_ac(void)
 {

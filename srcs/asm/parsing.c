@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:46:17 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/28 14:30:50 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/01 19:07:08 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int				parsing(t_asm *handle)
 
 	while (get_next_line(handle->fd_read, &buf) > 0)
 	{
-		if (buf[0] == '\0' && ft_strdel(&buf))
+		if (check_blanc(buf) && ft_strdel(&buf))
 			continue ;
 		if (handle->header.prog_name[0] == '\n')
 		{
@@ -84,10 +84,16 @@ int				parsing(t_asm *handle)
 			continue ;
 		}
 		if (handle->header.prog_name[0] != '\n' && handle->header.comment[0] == '\n')
+		{
 			if (parse_comment(handle, buf) && ft_strdel(&buf))
 				error_comment();
+			ft_strdel(&buf);
+			continue ;
+		}
+		if (handle->header.prog_name[0] != '\n' && handle->header.comment[0] != '\n')
+			if (parse_instruc(handle, buf) && ft_strdel(&buf))
+				error_instruc();
 		ft_strdel(&buf);
 	}
-	ft_printf("Le truc bizarre = %d\n", (int)handle->header.prog_name[8]);
 	return (1);
 }

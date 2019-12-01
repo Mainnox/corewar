@@ -1,0 +1,2 @@
+sti -> opcode 0b
+un octet vide avant chaque parametres non registre car si r alors pas de 00
