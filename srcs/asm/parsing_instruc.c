@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:45:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/03 01:58:09 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 05:08:45 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,10 +186,8 @@ int					parse_instruc(t_asm *handle, char *buf)
 	while (*buf || *buf == COMMENT_CHAR)
 	{
 		i = 0;
-		ft_printf("buf1 = |%s|\n", buf);
 		while (ft_isblank(*buf))
 			buf++;
-		ft_printf("buf1 = |%s|\n", buf);
 		if (*buf == COMMENT_CHAR)
 			break ;
 		if (first)
@@ -204,10 +202,7 @@ int					parse_instruc(t_asm *handle, char *buf)
 				error_instruc();
 		}
 		check_arg(buf, new, &i);
-		ft_printf("buf1 = |%s|\n", buf);
-		ft_printf("avance_buf = %d\n", avance_buf(buf));
 		buf += avance_buf(buf);
-		ft_printf("buf1 = |%s|\n", buf);
 		first = 1;
 	}
 	put_new_in_handle(handle, new);

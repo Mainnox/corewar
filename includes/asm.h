@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/03 00:29:54 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 06:01:10 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct				s_inst
 {
 	char					opcode;
 	char					nb_arg;
+	int						size;
 	char					*label;
 	char					*name;
 	t_arg					*arg;
@@ -94,9 +95,21 @@ void						print_hex_fd(t_asm *handle, unsigned int nb, char size, char odd);
 void						open_bar(t_asm *handle);
 
 /*
+**							change_fonctions
+*/
+
+void						change_label(t_asm *handle);
+
+/*
 **							global_functions
 */
 
 t_op						*gopt(void);
+
+/*
+** 							fill_functions
+*/
+
+void						fill_handle(t_asm *handle);
 
 #endif

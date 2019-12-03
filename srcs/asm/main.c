@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/02 22:15:40 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 04:05:44 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		init_handle(t_asm *handle, char *av)
 {
 	header_t		header;
 
-	header.prog_size = 20;
+	header.prog_size = 0xffffffff;
 	ft_bzero(header.prog_name, sizeof(header.prog_name));
 	header.prog_name[0] = '\n';
 	ft_bzero(header.comment, sizeof(header.comment));
@@ -49,6 +49,8 @@ int				main(int ac, char **av)
 		error_open();
 	test_op(&handle);
 	parsing(&handle);
+	fill_handle(&handle);
+	change_label(&handle);
 	test_handle(&handle);
 	test_inst(&handle);
 	print_cor(&handle);

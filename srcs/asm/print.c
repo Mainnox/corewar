@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:54:16 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/02 01:57:48 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 02:20:14 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			print_cor(t_asm *handle)
 	}
 	print_hex_fd(handle, handle->header.magic, handle->size_magic, handle->odd);
 	write(handle->fd_write, &handle->header.prog_name, sizeof(handle->header.prog_name));
-	while (++i < 7)
+	while (++i < 4)
 		write(handle->fd_write, &zero, sizeof(char));
 	print_hex_fd(handle, handle->header.prog_size, handle->size_prog_size, (handle->size_prog_size / 2) ? 0 : 1);
 	write(handle->fd_write, &handle->header.comment, sizeof(handle->header.comment));
