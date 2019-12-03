@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 10:34:24 by akremer           #+#    #+#             */
-/*   Updated: 2019/08/30 10:43:02 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 01:58:14 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char		*ft_strchr(const char *s, int c)
 	str = (char*)s;
 	rififi = (unsigned char)c;
 	if (rififi == '\0')
-		return (str + ft_strlen(str));
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == rififi)

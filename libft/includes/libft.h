@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 10:32:32 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/28 13:48:27 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/02 23:30:53 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+unsigned int		ft_atoui(const char *str);
 int					ft_tabchr(int *tab, int rififi, int limit);
 int					ft_tabcmp(int *tab, int *tab2, int limit);
 void				ft_tabcpy(int *src, int *dest, int limit);

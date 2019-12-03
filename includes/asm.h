@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/02 00:09:18 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 00:29:54 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 typedef struct				s_arg
 {
 	char					type_arg;
-	int						valeur;
+	unsigned int			valeur;
+	char					*label;
 	struct s_arg			*next;
 }							t_arg;
 
@@ -52,6 +53,8 @@ typedef struct 				s_asm
 */
 
 void						test_handle(t_asm *handle);
+void						test_inst(t_asm *handle);
+void						test_op(t_asm *handle);
 
 /*
 **							error_functions
@@ -89,5 +92,11 @@ void						print_hex_fd(t_asm *handle, unsigned int nb, char size, char odd);
 */
 
 void						open_bar(t_asm *handle);
+
+/*
+**							global_functions
+*/
+
+t_op						*gopt(void);
 
 #endif

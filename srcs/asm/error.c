@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:17:58 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/01 14:49:17 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/02 04:00:55 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void		error_comment(void)
 void		error_malloc(void)
 {
 	ft_printf("Say whaaaaaaaaaaaaaaaaaaaaat t'as casse maloc frere c'est pas bien !\nrefait pas ca stp !\n");
+	exit(0);
 }

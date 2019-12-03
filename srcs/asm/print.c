@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:54:16 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/28 20:33:10 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/02 01:57:48 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void			print_hex_fd(t_asm *handle, unsigned int nb, char size, char odd)
 	while (tab[i])
 	{
 		tmp = tmp * 16 + tab[i];
-		ft_printf("tmp a i = %d = %x\n", i, tmp);
 		if (tmp >= 16)
 		{
 			write(handle->fd_write, &tmp, 1);

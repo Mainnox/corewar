@@ -1,7 +1,8 @@
 .name "number_1"
 .comment "simple live"
 
-			live:                  #tamer
-	live%:live
-		live%:live
-			sti r1, :live, %:live
+			ld 				    2, r1
+			live:live%10                 #tamer
+	live %:live
+		live %:live
+			sti r1 ,:live         							, %:live

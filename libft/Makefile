@@ -6,7 +6,7 @@
 #    By: akremer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:38:05 by akremer           #+#    #+#              #
-#    Updated: 2019/11/28 12:44:41 by akremer          ###   ########.fr        #
+#    Updated: 2019/12/02 23:30:15 by akremer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ INCLUDES = includes/
 
 SRC =	ft_atoi.c				\
 		ft_memset.c				\
+		ft_atoui.c				\
 		ft_tabcmp.c				\
 		ft_bzero.c				\
 		ft_tabcpy.c				\

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoui.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyhamrou <lyhamrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 15:55:30 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/02 23:26:39 by akremer          ###   ########.fr       */
+/*   Created: 2019/12/02 23:26:49 by akremer           #+#    #+#             */
+/*   Updated: 2019/12/02 23:29:03 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-long long	ft_atol(char const *str)
+unsigned int	ft_atoui(char const *str)
 {
-	long long	nbr;
-	long long	neg;
+	unsigned int	nbr;
+	char			neg;
 
 	nbr = 0;
 	neg = 1;
