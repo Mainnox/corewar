@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:01:35 by akremer           #+#    #+#             */
-/*   Updated: 2019/11/28 13:31:46 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/04 00:16:31 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			open_bar(t_asm *handle)
 	handle->bin[len_name_s] = 'o';
 	handle->bin[len_name_s + 1] = 'r';
 	handle->bin[len_name_s + 2] = '\0';
-	handle->fd_write = open(handle->bin, O_WRONLY | O_CREAT, 0644);
+	handle->fd_write =  open(handle->bin, O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO);
 	if (handle->fd_write == -1)
 		error_open();
 }

@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 03:47:47 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/03 22:50:23 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/04 00:36:37 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void			test_handle(t_asm *handle)
 	ft_printf("|                                                                                |\n");
 	ft_printf("| header.prog_name=      %35s                     |\n", handle->header.prog_name);
 	ft_printf("| header.comment  =      %35s                     |\n", handle->header.comment);
+	ft_printf("| header.prog_size=      %35#x                     |\n", handle->header.prog_size);
 	ft_printf("|                                                                                |\n");
 	ft_printf("*================================================================================*\n");
 }
