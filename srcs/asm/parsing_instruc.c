@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:45:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/03 05:08:45 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 23:00:30 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static void			add_arg(t_inst *new, char *buf, char code, int *j)
 	i = 0;
 	if (!(arg = (t_arg*)ft_memalloc(sizeof(t_arg))))
 		error_malloc();
+	ft_bzero(arg, sizeof(t_arg));
 	arg->type_arg = code;
 	if (code == 4)
 	{
@@ -179,16 +180,21 @@ int					parse_instruc(t_asm *handle, char *buf)
 	while (ft_isblank(*buf))
 		buf++;
 	buf += check_label(buf, new);
+	while (ft_isblank(*buf))
+		buf++;
 	i = check_name(handle, buf, new);
 	if (!i)
-		error_instruc();
+	{
+		put_new_in_handle(handle, new);
+		return (0);
+	}
 	buf += i;
 	while (*buf || *buf == COMMENT_CHAR)
 	{
 		i = 0;
 		while (ft_isblank(*buf))
 			buf++;
-		if (*buf == COMMENT_CHAR)
+		if (*buf == COMMENT_CHAR || !*buf)
 			break ;
 		if (first)
 		{
@@ -206,6 +212,5 @@ int					parse_instruc(t_asm *handle, char *buf)
 		first = 1;
 	}
 	put_new_in_handle(handle, new);
-	test_inst(handle);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/03 06:01:10 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 23:10:42 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct				s_inst
 {
 	char					opcode;
 	char					nb_arg;
+	unsigned char			ocp;
 	int						size;
 	char					*label;
 	char					*name;

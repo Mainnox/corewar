@@ -2,6 +2,7 @@
 .comment "simple live"
 
 ld 				    :ld, r1
+live:       
 ld:				live%:ld                 #tamer
 	live %:live
 		live %:live

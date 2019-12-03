@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/03 04:05:44 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 18:10:55 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int				main(int ac, char **av)
 	test_op(&handle);
 	parsing(&handle);
 	fill_handle(&handle);
+	ft_printf("Tranquille ce soir !\n");
+	// change label seg
 	change_label(&handle);
 	test_handle(&handle);
 	test_inst(&handle);

@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 03:47:47 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/03 01:11:37 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/03 22:50:23 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,15 @@ void				test_inst(t_asm *handle)
 		ft_printf("|	t_inst nb %d = opcode = %hhd\n", i, tmp->opcode);
 		ft_printf("|	t_inst nb %d = label = %s\n", i, tmp->label);
 		ft_printf("|	t_inst nb %d = nb_arg = %hhd\n", i, tmp->nb_arg);
+		ft_printf("|	t_inst nb %d = size = %d\n", i, tmp->size);
+		ft_printf("|	t_inst nb %d = ocp = %#hhx\n", i, tmp->ocp);
 		tmp2 = tmp->arg;
 		j = 0;
 		while (tmp2)
 		{
 			ft_printf("|	t_inst nb %d = arg[%d] = type_arg = %hhd\n", i, j, tmp2->type_arg);
 			ft_printf("|	t_inst nb %d = arg[%d] = label = %s\n", i, j, tmp2->label);
-			ft_printf("|	t_inst nb %d = arg[%d] = valeur = %u\n", i, j, tmp2->valeur);
+			ft_printf("|	t_inst nb %d = arg[%d] = valeur = %#x\n", i, j, tmp2->valeur);
 			tmp2 = tmp2->next;
 			j++;
 		}
