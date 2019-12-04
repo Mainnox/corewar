@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/04 00:16:29 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/04 02:08:33 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct 				s_asm
 	char					odd;
 	char					size_magic;
 	char					size_prog_size;
+	char					zero;
 	int						fd_read;
 	int						fd_write;
 	char					*av;

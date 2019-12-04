@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:54:16 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/04 00:09:50 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/04 02:28:47 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,65 @@ void			print_hex_fd(t_asm *handle, unsigned int nb, char size, char odd)
 	}
 }
 
+static void		print_inst(t_asm *handle)
+{
+	t_inst		*inst;
+	t_arg		*arg;
+	int			size;
+	int			tmp;
+
+	size = 0;
+	tmp = 0;
+	inst = handle->inst;
+	while (inst)
+	{
+		if (inst->opcode)
+		{
+			write(handle->fd_write, &inst->opcode, 1);
+			if (ft_strcmp(inst->name, "live") != 0 && ft_strcmp(inst->name, "fork") != 0
+					&& ft_strcmp(inst->name, "lfork") != 0
+					&& ft_strcmp(inst->name, "zjump") != 0)
+				write(handle->fd_write, &inst->ocp, 1);
+			arg = inst->arg;
+			while (arg)
+			{
+				if (arg->type_arg == 1)
+					write(handle->fd_write, &arg->valeur, 1);
+				else if (arg->type_arg == 2 || (arg->type_arg == 4
+							&& (ft_strcmp(inst->name, "sti") == 0
+								|| ft_strcmp(inst->name, "ldi") == 0
+								|| ft_strcmp(inst->name, "lldi") == 0
+								|| ft_strcmp(inst->name, "fork") == 0
+								|| ft_strcmp(inst->name, "lfork") == 0
+								|| ft_strcmp(inst->name, "zjump") == 0)))
+				{
+					size = ft_nbrlen((unsigned long long)arg->valeur, 0, 16);
+					tmp = 2;
+					while (tmp - size)
+					{
+						write(handle->fd_write, &handle->zero, 1);
+						tmp--;
+					}
+					print_hex_fd(handle, arg->valeur, size, (size / 2) ? 0 : 1);
+				}
+				else if (arg->type_arg == 4)
+				{
+					size = ft_nbrlen((unsigned long long)arg->valeur, 0, 16);
+					tmp = 4;
+					while (tmp - size)
+					{
+						write(handle->fd_write, &handle->zero, 1);
+						tmp--;
+					}
+					print_hex_fd(handle, arg->valeur, size, (size / 2) ? 0 : 1);
+				}
+				arg = arg->next;
+			}
+		}
+		inst = inst->next;
+	}
+}
+
 void			print_cor(t_asm *handle)
 {
 	char		zero;
@@ -64,5 +123,6 @@ void			print_cor(t_asm *handle)
 	write(handle->fd_write, &handle->header.comment, sizeof(handle->header.comment));
 	while (++i < 11)
 		write(handle->fd_write, &zero, sizeof(char));
+	print_inst(handle);
 }
 
