@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/04 02:08:33 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/14 01:51:13 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,11 @@ t_op						*gopt(void);
 */
 
 void						fill_handle(t_asm *handle);
+
+/*
+**							free_functions
+*/
+
+void						free_all(t_asm *handle);
 
 #endif

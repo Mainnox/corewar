@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 02:22:57 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/03 18:46:22 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/14 01:36:17 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static void				fill_value(t_asm *handle, t_arg *ar, int where, int here)
 	int		i;
 
 	i = 0;
-	ft_printf("here = %d		| where = %d\n", here, where);
 	if (here > where)
 	{
 		start = where;

@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:01:35 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/04 00:16:31 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/14 01:51:15 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void			open_bar(t_asm *handle)
 	handle->fd_read = open(handle->av, O_RDONLY);
 	if (handle->fd_read < 2)
 		error_open();
-	if (!(handle->bin = (char*)ft_memalloc(sizeof(char) * len_name_s + 3)))
-		error_malloc();
 	handle->bin = ft_strdup(handle->av);
 	handle->bin[len_name_s - 1] = 'c';
 	handle->bin[len_name_s] = 'o';

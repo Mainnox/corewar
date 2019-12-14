@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/04 02:08:11 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/14 01:51:17 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				main(int ac, char **av)
 {
 	t_asm		handle;
 
+	(void)av;
 	if (ac != 2)
 		error_ac();
 	init_handle(&handle, av[1]);
@@ -56,7 +57,7 @@ int				main(int ac, char **av)
 	test_handle(&handle);
 	test_inst(&handle);
 	print_cor(&handle);
-	close(handle.fd_read);
-	close(handle.fd_write);
+	free_all(&handle);
+	system("leaks --list asm");
 	return (0);
 }
