@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:54:16 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/04 02:28:47 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/14 04:20:26 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ void			print_cor(t_asm *handle)
 	i = 0;
 	zero = 0;
 	tmp = handle->size_magic;
+	handle->fd_write = open(handle->bin, O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO);
+	if (handle->fd_write == -1)
+		error_open(handle);
 	while (4 - tmp / 2)
 	{
 		write(handle->fd_write, &zero, 1);

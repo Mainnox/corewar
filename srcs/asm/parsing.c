@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:46:17 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/14 01:39:16 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/14 04:08:30 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,25 +74,26 @@ int				parsing(t_asm *handle)
 
 	while (get_next_line(handle->fd_read, &buf) > 0)
 	{
+		handle->count_line++;
 		if (check_blanc(buf) && ft_strdel(&buf))
 			continue ;
 		if (handle->header.prog_name[0] == '\n')
 		{
 			if (parse_name(handle, buf) && ft_strdel(&buf))
-				error_name();
+				error_name(handle);
 			ft_strdel(&buf);
 			continue ;
 		}
 		if (handle->header.prog_name[0] != '\n' && handle->header.comment[0] == '\n')
 		{
 			if (parse_comment(handle, buf) && ft_strdel(&buf))
-				error_comment();
+				error_comment(handle);
 			ft_strdel(&buf);
 			continue ;
 		}
 		if (handle->header.prog_name[0] != '\n' && handle->header.comment[0] != '\n')
 			if (parse_instruc(handle, buf) && ft_strdel(&buf))
-				error_instruc();
+				error_instruc(handle, buf);
 		ft_strdel(&buf);
 	}
 	return (1);

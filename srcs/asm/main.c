@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/14 01:51:17 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/14 04:49:08 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,21 @@ int				main(int ac, char **av)
 
 	(void)av;
 	if (ac != 2)
-		error_ac();
+		error_ac(&handle);
 	init_handle(&handle, av[1]);
 	open_bar(&handle);
 	handle.fd_read = open(av[1], O_RDONLY);
 	if (handle.fd_read < 2)
-		error_open();
-	test_op(&handle);
+		error_open(&handle);
 	parsing(&handle);
+	check_parsing(&handle);
 	fill_handle(&handle);
-	ft_printf("Tranquille ce soir !\n");
-	// change label seg
 	change_label(&handle);
-	test_handle(&handle);
-	test_inst(&handle);
+	if (handle.inst)
+		test_inst(&handle);
 	print_cor(&handle);
+	test_handle(&handle);
+	test_op(&handle);
 	free_all(&handle);
 	system("leaks --list asm");
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/14 01:51:13 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/14 06:23:24 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct 				s_asm
 	char					size_magic;
 	char					size_prog_size;
 	char					zero;
+	int						count_line;
 	int						fd_read;
 	int						fd_write;
 	char					*av;
@@ -63,18 +64,23 @@ void						test_op(t_asm *handle);
 **							error_functions
 */
 
-void						error_ac(void);
-void						error_open(void);
-void						error_name(void);
-void						error_comment(void);
-void						error_malloc(void);
-void						error_instruc(void);
+void						error_ac(t_asm *handle);
+void						error_open(t_asm *handle);
+void						error_name(t_asm *handle);
+void						error_comment(t_asm *handle);
+void						error_malloc(t_asm *handle);
+void						error_instruc(t_asm *handle, char *buf);
+void						error_no_inst(t_asm *handle);
+void						error_too_much_arg(t_asm *handle, int nb_inst);
+void						error_wrong_arg(t_asm *handle, char nb_arg, int nb_inst);
+void						error_too_few_arg(t_asm *handle, int i);
 
 /*
 **							check_functions
 */
 
 int							check_blanc(char *buf);
+void						check_parsing(t_asm *handle);
 
 /*
 **							parsing_functions

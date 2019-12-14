@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:45:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/03 23:00:30 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/14 04:10:26 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ static void			put_arg_in_new(t_inst *new, t_arg *arg)
 	tmp->next = arg;
 }
 
-static void			add_arg(t_inst *new, char *buf, char code, int *j)
+static void			add_arg(t_asm *handle, t_inst *new, char *buf, char code, int *j)
 {
 	t_arg		*arg;
 	int			i;
 
 	i = 0;
 	if (!(arg = (t_arg*)ft_memalloc(sizeof(t_arg))))
-		error_malloc();
+		error_malloc(handle);
 	ft_bzero(arg, sizeof(t_arg));
 	arg->type_arg = code;
 	if (code == 4)
@@ -115,7 +115,7 @@ static void			add_arg(t_inst *new, char *buf, char code, int *j)
 		*j = *j + 1;
 		arg->valeur = ft_atoui(buf);
 		if (arg->valeur == 0 || arg->valeur > REG_NUMBER)
-			error_instruc();
+			error_instruc(handle, buf);
 	}
 	if (code == 2 || code == 4)
 	{
@@ -125,24 +125,24 @@ static void			add_arg(t_inst *new, char *buf, char code, int *j)
 			if (*buf == '-' || *buf == '+')
 				buf++;
 			if (*buf < '0' || *buf > '9')
-				error_instruc();
+				error_instruc(handle, buf);
 		}
 	}
 	put_arg_in_new(new, arg);
 }
 
-static void			check_arg(char *buf, t_inst *new, int *i)
+static void			check_arg(t_asm *handle, char *buf, t_inst *new, int *i)
 {
 	if (*buf == DIRECT_CHAR)
-		add_arg(new, buf, 4, i);
+		add_arg(handle, new, buf, 4, i);
 	else if (*buf == LABEL_CHAR)
-		add_arg(new, buf, 2, i);
+		add_arg(handle, new, buf, 2, i);
 	else if (*buf == 'r')
-		add_arg(new, buf, 1, i);
+		add_arg(handle, new, buf, 1, i);
 	else if (*buf == '-' || *buf == '+' || (*buf >= '0' && *buf <= '9'))
-		add_arg(new, buf, 2, i);
+		add_arg(handle, new, buf, 2, i);
 	else
-		error_instruc();
+		error_instruc(handle, buf);
 }
 
 static int			avance_buf(char *buf)
@@ -175,7 +175,7 @@ int					parse_instruc(t_asm *handle, char *buf)
 	i = 0;
 	first = 0;
 	if (!(new = (t_inst*)ft_memalloc(sizeof(t_inst))))
-		return (1);
+		error_malloc(handle);
 	ft_bzero(new, sizeof(t_inst));
 	while (ft_isblank(*buf))
 		buf++;
@@ -205,9 +205,9 @@ int					parse_instruc(t_asm *handle, char *buf)
 				continue ;
 			}
 			else
-				error_instruc();
+				error_instruc(handle, buf);
 		}
-		check_arg(buf, new, &i);
+		check_arg(handle, buf, new, &i);
 		buf += avance_buf(buf);
 		first = 1;
 	}
