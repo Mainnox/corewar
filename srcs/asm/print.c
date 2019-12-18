@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:54:16 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/14 04:20:26 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/18 23:14:38 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,13 @@ static void		print_inst(t_asm *handle)
 	}
 }
 
+static void		print_header(t_asm *handle)
+{
+	swap_int(&handle->header.magic);
+	swap_int(&handle->header.prog_size);
+	write(handle->fd_write, &handle->header, sizeof(handle->header));
+}
+
 void			print_cor(t_asm *handle)
 {
 	char		zero;
@@ -113,19 +120,7 @@ void			print_cor(t_asm *handle)
 	handle->fd_write = open(handle->bin, O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO);
 	if (handle->fd_write == -1)
 		error_open(handle);
-	while (4 - tmp / 2)
-	{
-		write(handle->fd_write, &zero, 1);
-		tmp += 2;
-	}
-	print_hex_fd(handle, handle->header.magic, handle->size_magic, handle->odd);
-	write(handle->fd_write, &handle->header.prog_name, sizeof(handle->header.prog_name));
-	while (++i < 4)
-		write(handle->fd_write, &zero, sizeof(char));
-	print_hex_fd(handle, handle->header.prog_size, handle->size_prog_size, (handle->size_prog_size / 2) ? 0 : 1);
-	write(handle->fd_write, &handle->header.comment, sizeof(handle->header.comment));
-	while (++i < 11)
-		write(handle->fd_write, &zero, sizeof(char));
+	print_header(handle);
 	print_inst(handle);
 }
 

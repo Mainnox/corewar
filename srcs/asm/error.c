@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:17:58 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/14 08:29:08 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 00:16:44 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		error_too_much_arg(t_asm *handle, int nb_inst)
 
 void		error_wrong_arg(t_asm *handle, char nb_arg, int nb_inst)
 {
-	ft_printf("The argument %d of the instruction %d got nothing to do here !\nPliz fix it !\n", nb_arg, nb_inst);
+	ft_printf("The argument %d of the instruction %d got nothing to do here !\nIt's like bred a incest child that's gonna be ...\nHmmm ...\nLet's say rather dysfunctional.\n", nb_arg, nb_inst);
 	free_all(handle);
 	exit (0);
 }
