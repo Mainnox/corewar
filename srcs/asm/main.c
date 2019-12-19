@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 02:19:09 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 04:02:06 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ int				main(int ac, char **av)
 	check_parsing(&handle);
 	fill_handle(&handle);
 	change_label(&handle);
-	if (handle.inst)
-		test_inst(&handle);
 	print_cor(&handle);
-	test_handle(&handle);
 	free_all(&handle);
 	return (0);
 }
