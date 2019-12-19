@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:17:58 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 00:16:44 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 00:38:50 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void		error_no_inst(t_asm *handle)
 
 void		error_instruc(t_asm *handle, char *buf)
 {
-	ft_printf("Unknow command or params line %d : \"%s\"\n%s\n", handle->count_line, buf, USAGE);
+	ft_printf("Unknow command or params line %d : \"%s\"\n%s\nIf I know I unknow it that's mean ...\nSEGFAULT !\n", handle->count_line, buf, USAGE);
 	free_all(handle);
 	exit(0);
 }
 
 void		error_ac(t_asm *handle)
 {
-	ft_printf("Wrong number of arguments !\n%s\n", USAGE);
+	ft_printf("Wrong number of arguments !\n%s\nI'm not polygamous !\n", USAGE);
 	free_all(handle);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:54:16 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/18 23:14:38 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 03:38:09 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ void			print_hex_fd(t_asm *handle, unsigned int nb, char size, char odd)
 	while (++i < size)
 	{
 		tab[i] = nb % 16;
+		ft_printf("size = %d\n tab[%d] = %hhd\n", size, i, tab[i]);
 		nb /= 16;
 	}
 	ft_strrev(tab);
+	ft_printf("Il passe la !\n");
 	i = 0;
 	if (odd)
 		write(handle->fd_write, &tab[i++], 1);
-	while (tab[i])
+	while (tab[i] && size--)
 	{
 		tmp = tmp * 16 + tab[i];
 		if (tmp >= 16)
@@ -42,28 +44,34 @@ void			print_hex_fd(t_asm *handle, unsigned int nb, char size, char odd)
 	}
 }
 
-static void		print_inst(t_asm *handle)
+/*static void		print_inst(t_asm *handle)
 {
 	t_inst		*inst;
 	t_arg		*arg;
 	int			size;
 	int			tmp;
+	int			test_inst;
+	int			test_arg;
 
+	test_arg = 0;
+	test_inst = 0;
 	size = 0;
 	tmp = 0;
 	inst = handle->inst;
 	while (inst)
 	{
+		ft_printf("inst->name = %s\n", inst->name);
 		if (inst->opcode)
 		{
 			write(handle->fd_write, &inst->opcode, 1);
 			if (ft_strcmp(inst->name, "live") != 0 && ft_strcmp(inst->name, "fork") != 0
 					&& ft_strcmp(inst->name, "lfork") != 0
-					&& ft_strcmp(inst->name, "zjump") != 0)
+					&& ft_strcmp(inst->name, "zjmp") != 0)
 				write(handle->fd_write, &inst->ocp, 1);
 			arg = inst->arg;
 			while (arg)
 			{
+				test_arg = 0;
 				if (arg->type_arg == 1)
 					write(handle->fd_write, &arg->valeur, 1);
 				else if (arg->type_arg == 2 || (arg->type_arg == 4
@@ -72,11 +80,12 @@ static void		print_inst(t_asm *handle)
 								|| ft_strcmp(inst->name, "lldi") == 0
 								|| ft_strcmp(inst->name, "fork") == 0
 								|| ft_strcmp(inst->name, "lfork") == 0
-								|| ft_strcmp(inst->name, "zjump") == 0)))
+								|| ft_strcmp(inst->name, "zjmp") == 0)))
 				{
 					size = ft_nbrlen((unsigned long long)arg->valeur, 0, 16);
 					tmp = 2;
-					while (tmp - size)
+					ft_printf("size = %d\n", size);
+					while (tmp - size > 0)
 					{
 						write(handle->fd_write, &handle->zero, 1);
 						tmp--;
@@ -87,15 +96,60 @@ static void		print_inst(t_asm *handle)
 				{
 					size = ft_nbrlen((unsigned long long)arg->valeur, 0, 16);
 					tmp = 4;
-					while (tmp - size)
+					while (tmp - size > 0)
 					{
 						write(handle->fd_write, &handle->zero, 1);
 						tmp--;
 					}
 					print_hex_fd(handle, arg->valeur, size, (size / 2) ? 0 : 1);
 				}
+				ft_printf("test_arg = %d\n", test_arg);
+				test_arg++;
 				arg = arg->next;
 			}
+		}
+		ft_printf("test_inst = %d\n", test_inst);
+		test_inst++;
+		inst = inst->next;
+	}
+}*/
+
+static void		print_inst(t_asm *handle)
+{
+	t_inst		*inst;
+	t_arg		*arg;
+
+	inst = handle->inst;
+	while (inst)
+	{
+		arg = inst->arg;
+		write(handle->fd_write, &inst->opcode, 1);
+		if (ft_strcmp(inst->name, "live") != 0
+				&& ft_strcmp(inst->name, "fork") != 0
+				&& ft_strcmp(inst->name, "lfork") != 0
+				&& ft_strcmp(inst->name, "zjmp") != 0)
+			write(handle->fd_write, &inst->ocp, 1);
+		while (arg)
+		{
+			if (arg->type_arg == 1)
+					write(handle->fd_write, &arg->valeur, 1);
+			else if (arg->type_arg == 2 || (arg->type_arg == 4
+						&& (ft_strcmp(inst->name, "sti") == 0
+							|| ft_strcmp(inst->name, "ldi") == 0
+							|| ft_strcmp(inst->name, "lldi") == 0
+							|| ft_strcmp(inst->name, "fork") == 0
+							|| ft_strcmp(inst->name, "lfork") == 0
+							|| ft_strcmp(inst->name, "zjmp") == 0)))
+			{
+				swap_short((unsigned short *)&arg->valeur);
+				write(handle->fd_write, &arg->valeur, sizeof(unsigned short));
+			}
+			else if (arg->type_arg == 4)
+			{
+				swap_int(&arg->valeur);
+				write(handle->fd_write, &arg->valeur, sizeof(unsigned int));
+			}
+			arg = arg->next;
 		}
 		inst = inst->next;
 	}
@@ -122,5 +176,6 @@ void			print_cor(t_asm *handle)
 		error_open(handle);
 	print_header(handle);
 	print_inst(handle);
+	ft_printf("tu passe ?\n");
 }
 

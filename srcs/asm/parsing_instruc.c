@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:45:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/14 04:10:26 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 02:19:27 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,15 @@ static void			add_arg(t_asm *handle, t_inst *new, char *buf, char code, int *j)
 	}
 	if (code == 2 || code == 4)
 	{
-		arg->valeur = ft_atoui(buf);
+		if (code == 2 || (code == 4 && (ft_strcmp(new->name, "sti") == 0
+								|| ft_strcmp(new->name, "ldi") == 0
+								|| ft_strcmp(new->name, "lldi") == 0
+								|| ft_strcmp(new->name, "fork") == 0
+								|| ft_strcmp(new->name, "lfork") == 0
+								|| ft_strcmp(new->name, "zjmp") == 0)))
+			arg->valeur = (unsigned short)ft_atoui(buf);
+		else
+			arg->valeur = ft_atoui(buf);
 		if (arg->valeur == 0)
 		{
 			if (*buf == '-' || *buf == '+')

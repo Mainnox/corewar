@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/18 23:47:20 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 03:38:11 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,6 @@ void						free_all(t_asm *handle);
 */
 
 void						swap_int(unsigned int *it);
+void						swap_short(unsigned short *it);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:30:29 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/18 23:09:33 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 03:08:42 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ static void			swap(unsigned char *a, unsigned char *b)
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
+}
+
+void				swap_short(unsigned short *it)
+{
+	unsigned char *p;
+
+	p = (unsigned char *)it;
+	swap(p, p + 1);
 }
 
 void				swap_int(unsigned int *it)

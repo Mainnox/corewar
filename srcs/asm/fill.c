@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 04:05:52 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/04 00:40:40 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 02:18:58 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			fill_inst_4(t_inst *ins)
 	t_arg		*arg;
 
 	arg = ins->arg;
-	if (ft_strcmp(ins->name, "live") == 0 || ft_strcmp(ins->name, "zjump") == 0
+	if (ft_strcmp(ins->name, "live") == 0 || ft_strcmp(ins->name, "zjmp") == 0
 			|| ft_strcmp(ins->name, "fork") == 0 || ft_strcmp(ins->name, "lfork") == 0)
 		ins->size += 1;
 	else
@@ -39,7 +39,7 @@ static void			fill_inst_2(t_inst *ins)
 	t_arg		*arg;
 
 	arg = ins->arg;
-	if (ft_strcmp(ins->name, "live") == 0 || ft_strcmp(ins->name, "zjump") == 0
+	if (ft_strcmp(ins->name, "live") == 0 || ft_strcmp(ins->name, "zjmp") == 0
 			|| ft_strcmp(ins->name, "fork") == 0 || ft_strcmp(ins->name, "lfork") == 0)
 		ins->size += 1;
 	else

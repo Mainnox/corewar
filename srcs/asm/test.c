@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 03:47:47 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/14 01:31:06 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 03:03:27 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,15 @@ void				test_inst(t_asm *handle)
 		{
 			ft_printf("|	t_inst nb %d = arg[%d] = type_arg = %hhd\n", i, j, tmp2->type_arg);
 			ft_printf("|	t_inst nb %d = arg[%d] = label = %s\n", i, j, tmp2->label);
-			ft_printf("|	t_inst nb %d = arg[%d] = valeur = %#x\n", i, j, tmp2->valeur);
+			if ((ft_strcmp(tmp->name, "sti") == 0
+								|| ft_strcmp(tmp->name, "ldi") == 0
+								|| ft_strcmp(tmp->name, "lldi") == 0
+								|| ft_strcmp(tmp->name, "fork") == 0
+								|| ft_strcmp(tmp->name, "lfork") == 0
+								|| ft_strcmp(tmp->name, "zjmp") == 0))
+				ft_printf("|	t_inst nb %d = arg[%d] = valeur = %#hx\n", i, j, tmp2->valeur);
+			else
+				ft_printf("|	t_inst nb %d = arg[%d] = valeur = %#x\n", i, j, tmp2->valeur);
 			tmp2 = tmp2->next;
 			j++;
 		}

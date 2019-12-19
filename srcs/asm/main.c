@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/14 04:49:08 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 02:19:09 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int				main(int ac, char **av)
 		test_inst(&handle);
 	print_cor(&handle);
 	test_handle(&handle);
-	test_op(&handle);
 	free_all(&handle);
-	system("leaks --list asm");
 	return (0);
 }

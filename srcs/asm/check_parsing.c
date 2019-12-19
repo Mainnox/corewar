@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 18:42:37 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/14 08:29:06 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 02:18:24 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		check_r_r_r(t_asm *handle, t_inst *inst, int i)
 		count++;
 		tmp = tmp->next;
 	}
-	if (count != 3)
+	if (count != 4)
 		error_too_few_arg(handle, i);
 }
 
@@ -70,7 +70,7 @@ static void		check_di_r(t_asm *handle, t_inst *inst, int i)
 		count++;
 		tmp = tmp->next;
 	} 
-	if (count != 2)
+	if (count != 3)
 		error_too_few_arg(handle, i);
 }
 
@@ -94,7 +94,8 @@ static void		check_r_ir(t_asm *handle, t_inst *inst, int i)
 		count++;
 		tmp = tmp->next;
 	}
-	if (count != 2)
+	ft_printf("count = %d\n", count);
+	if (count != 3)
 		error_too_few_arg(handle, i);
 }
 
@@ -115,7 +116,7 @@ static void		check_rdi_rdi_r(t_asm *handle, t_inst *inst, int i)
 		count++;
 		tmp = tmp->next;
 	}
-	if (count != 3)
+	if (count != 4)
 		error_too_few_arg(handle, i);
 }
 
@@ -139,7 +140,7 @@ static void		check_rdi_rd_r(t_asm *handle, t_inst *inst, int i)
 		count++;
 		tmp = tmp->next;
 	}
-	if (count != 3)
+	if (count != 4)
 		error_too_few_arg(handle, i);
 }
 
@@ -154,7 +155,7 @@ static void		check_inst(t_asm *handle)
 	{
 		i++;
 		if (ft_strcmp(tmp->name, "live") == 0 || ft_strcmp(tmp->name, "fork") == 0
-				|| ft_strcmp(tmp->name, "zjump") == 0 || ft_strcmp(tmp->name, "lfork") == 0)
+				|| ft_strcmp(tmp->name, "zjmp") == 0 || ft_strcmp(tmp->name, "lfork") == 0)
 			check_d(handle, tmp, i);
 		if (ft_strcmp(tmp->name, "ld") == 0 || ft_strcmp(tmp->name, "lld") == 0)
 			check_di_r(handle, tmp, i);
