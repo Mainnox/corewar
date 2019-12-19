@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 04:02:06 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 05:03:20 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ static void		init_handle(t_asm *handle, char *av)
 	header.comment[0] = '\n';
 	header.magic = COREWAR_EXEC_MAGIC;
 	handle->header = header;
-	handle->size_prog_size = ft_nbrlen((unsigned long long) handle->header.prog_size, 0, 16);
-	handle->size_magic = ft_nbrlen((unsigned long long) handle->header.magic, 0, 16);
+	handle->size_prog_size = ft_nbrlen(
+			(unsigned long long)handle->header.prog_size, 0, 16);
+	handle->size_magic = ft_nbrlen(
+			(unsigned long long)handle->header.magic, 0, 16);
 	handle->fd_read = 0;
 	if (handle->size_magic / 2)
 		handle->odd = 0;

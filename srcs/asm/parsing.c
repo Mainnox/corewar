@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:46:17 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 02:19:19 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 05:25:32 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int		parse_comment(t_asm *handle, char *buf)
 	i = 0;
 	while (buf[i] == '\t' || buf[i] == ' ')
 		i++;
-	if (ft_strncmp(COMMENT_CMD_STRING, buf + i, ft_strlen(COMMENT_CMD_STRING)) != 0)
+	if (ft_strncmp(COMMENT_CMD_STRING, buf + i,
+				ft_strlen(COMMENT_CMD_STRING)) != 0)
 		return (1);
 	i += ft_strlen(COMMENT_CMD_STRING);
 	while (buf[i] == '\t' || buf[i] == ' ')
@@ -84,14 +85,16 @@ int				parsing(t_asm *handle)
 			ft_strdel(&buf);
 			continue ;
 		}
-		if (handle->header.prog_name[0] != '\n' && handle->header.comment[0] == '\n')
+		if (handle->header.prog_name[0] != '\n'
+				&& handle->header.comment[0] == '\n')
 		{
 			if (parse_comment(handle, buf) && ft_strdel(&buf))
 				error_comment(handle);
 			ft_strdel(&buf);
 			continue ;
 		}
-		if (handle->header.prog_name[0] != '\n' && handle->header.comment[0] != '\n')
+		if (handle->header.prog_name[0] != '\n'
+				&& handle->header.comment[0] != '\n')
 			if (parse_instruc(handle, buf) && ft_strdel(&buf))
 				error_instruc(handle, buf);
 		ft_strdel(&buf);

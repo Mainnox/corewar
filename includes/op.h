@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2019/12/18 23:09:20 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 05:17:22 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct		s_op
 	int				args[3];
 	char			opcode;
 	int				cycle;
-	char			*descrip;
 	char			jesaispas;
 	char			luinonplus;
 }					t_op;

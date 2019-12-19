@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/19 03:38:11 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 05:01:03 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,13 @@ void						error_too_few_arg(t_asm *handle, int i);
 
 int							check_blanc(char *buf);
 void						check_parsing(t_asm *handle);
+void						check_rdi_rd_r(t_asm *handle, t_inst *inst, int i);
+void						check_r_rdi_dr(t_asm *handle, t_inst *inst, int i);
+void						check_r_r_r(t_asm *handle, t_inst *inst, int i);
+void						check_d(t_asm *handle, t_inst *inst, int i);
+void						check_di_r(t_asm *handle, t_inst *inst, int i);
+void						check_r_ir(t_asm *handle, t_inst *inst, int i);
+void						check_rdi_rdi_r(t_asm *handle, t_inst *inst, int i);
 
 /*
 **							parsing_functions
@@ -119,6 +126,9 @@ t_op						*gopt(void);
 */
 
 void						fill_handle(t_asm *handle);
+void						fill_ocp_0(t_inst *inst, t_arg *arg);
+void						fill_ocp_1(t_inst *inst, t_arg *arg);
+void						fill_ocp_2(t_inst *inst, t_arg *arg);
 
 /*
 **							free_functions

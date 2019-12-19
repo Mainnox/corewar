@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 03:47:47 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 03:03:27 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 05:15:47 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void				test_op(t_asm *handle)
 		ft_printf("handle->op_tab[%d].arg3 = %d\n", i, handle->op_tab[i].args[2]);
 		ft_printf("handle->op_tab[%d].opcode = %hhd\n", i, handle->op_tab[i].opcode);
 		ft_printf("handle->op_tab[%d].cycle = %d\n", i, handle->op_tab[i].cycle);
-		ft_printf("handle->op_tab[%d].descrip = %s\n", i, handle->op_tab[i].descrip);
 		ft_printf("handle->op_tab[%d].jesaispas = %hhd\n", i, handle->op_tab[i].jesaispas);
 		ft_printf("handle->op_tab[%d].luinonplus = %hhd\n", i, handle->op_tab[i].luinonplus);
 		i++;

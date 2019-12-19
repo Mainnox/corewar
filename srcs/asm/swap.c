@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:30:29 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 03:08:42 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 05:29:14 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void				swap_short(unsigned short *it)
 
 void				swap_int(unsigned int *it)
 {
-	unsigned char 		*p;
+	unsigned char	*p;
 
 	p = (unsigned char *)it;
 	swap(p, p + 3);

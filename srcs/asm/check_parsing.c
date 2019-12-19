@@ -6,167 +6,11 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 18:42:37 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 03:47:43 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 04:56:18 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-static void		check_r_r_r(t_asm *handle, t_inst *inst, int i)
-{
-	t_arg	*tmp;
-	char	count;
-
-	count = 1;
-	tmp = inst->arg;
-	while (tmp)
-	{
-		if (count == 1)
-			if (tmp->type_arg != 1)
-				error_wrong_arg(handle, count, i);
-		if (count == 2)
-			if (tmp->type_arg != 1)
-				error_wrong_arg(handle, count, i);
-		if (count == 3)
-			if (tmp->type_arg != 1)
-				error_wrong_arg(handle, count, i);
-		if (count > 3)
-			error_too_much_arg(handle, i);
-		count++;
-		tmp = tmp->next;
-	}
-	if (count != 4)
-		error_too_few_arg(handle, i);
-}
-
-static void		check_d(t_asm *handle, t_inst *inst, int i)
-{
-	t_arg	*tmp;
-
-	tmp = inst->arg;
-	if (tmp->type_arg != 4)
-		error_wrong_arg(handle, 1, i);
-	if (tmp->next)
-		error_too_much_arg(handle, i);
-}
-
-static void		check_di_r(t_asm *handle, t_inst *inst, int i)
-{
-	t_arg	*tmp;
-	char	count;
-
-	count = 1;
-	tmp = inst->arg;
-	while (tmp)
-	{
-		if (count == 1)
-			if (tmp->type_arg != 2 && tmp->type_arg != 4)
-				error_wrong_arg(handle, count, i);
-		if (count == 2)
-			if (tmp->type_arg != 1)
-				error_wrong_arg(handle, count, i);
-		if (count > 2)
-			error_too_much_arg(handle, i);
-		count++;
-		tmp = tmp->next;
-	} 
-	if (count != 3)
-		error_too_few_arg(handle, i);
-}
-
-static void		check_r_ir(t_asm *handle, t_inst *inst, int i)
-{
-	t_arg	*tmp;
-	char	count;
-
-	count = 1;
-	tmp = inst->arg;
-	while (tmp)
-	{
-		if (count == 1)
-			if (tmp->type_arg != 1)
-				error_wrong_arg(handle, count, i);
-		if (count == 2)
-			if (tmp->type_arg != 1 && tmp->type_arg != 2)
-				error_wrong_arg(handle, count, i);
-		if (count > 2)
-			error_too_much_arg(handle, i);
-		count++;
-		tmp = tmp->next;
-	}
-	if (count != 3)
-		error_too_few_arg(handle, i);
-}
-
-static void		check_rdi_rdi_r(t_asm *handle, t_inst *inst, int i)
-{
-	t_arg	*tmp;
-	char	count;
-
-	count = 1;
-	tmp = inst->arg;
-	while (tmp)
-	{
-		if (count == 3)
-			if (tmp->type_arg != 1)
-				error_wrong_arg(handle, count, i);
-		if (count > 3)
-			error_too_much_arg(handle, i);
-		count++;
-		tmp = tmp->next;
-	}
-	if (count != 4)
-		error_too_few_arg(handle, i);
-}
-
-static void		check_r_rdi_dr(t_asm *handle, t_inst *inst, int i)
-{
-	t_arg	*tmp;
-	char	count;
-
-	count = 1;
-	tmp = inst->arg;
-	while (tmp)
-	{
-		if (count == 1)
-			if (tmp->type_arg != 1)
-				error_wrong_arg(handle, count, i);
-		if (count == 3)
-			if (tmp->type_arg != 1 && tmp->type_arg != 4)
-				error_wrong_arg(handle, count, i);
-		if (count > 3)
-			error_too_much_arg(handle, i);
-		count++;
-		tmp = tmp->next;
-	}
-	if (count != 4)
-		error_too_few_arg(handle, i);
-}
-
-
-static void		check_rdi_rd_r(t_asm *handle, t_inst *inst, int i)
-{
-	t_arg	*tmp;
-	char	count;
-
-	count = 1;
-	tmp = inst->arg;
-	while (tmp)
-	{
-		if (count == 2)
-			if (tmp->type_arg != 1 && tmp->type_arg != 4)
-				error_wrong_arg(handle, count, i);
-		if (count == 3)
-			if (tmp->type_arg != 1)
-				error_wrong_arg(handle, count, i);
-		if (count > 3)
-			error_too_much_arg(handle, i);
-		count++;
-		tmp = tmp->next;
-	}
-	if (count != 4)
-		error_too_few_arg(handle, i);
-}
 
 static void		check_r(t_asm *handle, t_inst *inst, int i)
 {
@@ -179,6 +23,34 @@ static void		check_r(t_asm *handle, t_inst *inst, int i)
 		error_too_much_arg(handle, i);
 }
 
+static void		check_inst_helper(t_asm *handle, t_inst *tmp, int i)
+{
+	if (ft_strcmp(tmp->name, "live") == 0
+			|| ft_strcmp(tmp->name, "fork") == 0
+			|| ft_strcmp(tmp->name, "zjmp") == 0
+			|| ft_strcmp(tmp->name, "lfork") == 0)
+		check_d(handle, tmp, i);
+	if (ft_strcmp(tmp->name, "ld") == 0
+			|| ft_strcmp(tmp->name, "lld") == 0)
+		check_di_r(handle, tmp, i);
+	if (ft_strcmp(tmp->name, "add") == 0
+			|| ft_strcmp(tmp->name, "sub") == 0)
+		check_r_r_r(handle, tmp, i);
+	if (ft_strcmp(tmp->name, "st") == 0)
+		check_r_ir(handle, tmp, i);
+	if (ft_strcmp(tmp->name, "and") == 0
+			|| ft_strcmp(tmp->name, "or") == 0
+			|| ft_strcmp(tmp->name, "xor") == 0)
+		check_rdi_rdi_r(handle, tmp, i);
+	if (ft_strcmp(tmp->name, "ldi") == 0
+			|| ft_strcmp(tmp->name, "lldi") == 0)
+		check_rdi_rd_r(handle, tmp, i);
+	if (ft_strcmp(tmp->name, "sti") == 0)
+		check_r_rdi_dr(handle, tmp, i);
+	if (ft_strcmp(tmp->name, "aff") == 0)
+		check_r(handle, tmp, i);
+}
+
 static void		check_inst(t_asm *handle)
 {
 	t_inst		*tmp;
@@ -189,23 +61,7 @@ static void		check_inst(t_asm *handle)
 	while (tmp)
 	{
 		i++;
-		if (ft_strcmp(tmp->name, "live") == 0 || ft_strcmp(tmp->name, "fork") == 0
-				|| ft_strcmp(tmp->name, "zjmp") == 0 || ft_strcmp(tmp->name, "lfork") == 0)
-			check_d(handle, tmp, i);
-		if (ft_strcmp(tmp->name, "ld") == 0 || ft_strcmp(tmp->name, "lld") == 0)
-			check_di_r(handle, tmp, i);
-		if (ft_strcmp(tmp->name, "add") == 0 || ft_strcmp(tmp->name, "sub") == 0)
-			check_r_r_r(handle, tmp, i);
-		if (ft_strcmp(tmp->name, "st") == 0)
-			check_r_ir(handle, tmp, i);
-		if (ft_strcmp(tmp->name, "and") == 0 || ft_strcmp(tmp->name, "or") == 0 || ft_strcmp(tmp->name, "xor") == 0)
-			check_rdi_rdi_r(handle, tmp, i);
-		if (ft_strcmp(tmp->name, "ldi") == 0 || ft_strcmp(tmp->name, "lldi") == 0)
-			check_rdi_rd_r(handle, tmp, i);
-		if (ft_strcmp(tmp->name, "sti") == 0)
-			check_r_rdi_dr(handle, tmp, i);
-		if (ft_strcmp(tmp->name, "aff") == 0)
-			check_r(handle, tmp, i);
+		check_inst_helper(handle, tmp, i);
 		tmp = tmp->next;
 	}
 }

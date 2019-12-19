@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 02:22:57 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/14 01:36:17 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/19 04:34:51 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int				find_label(t_asm *handle, char *label)
 	return (-1);
 }
 
-static void				reverse_label(t_asm *handle, t_arg *ar, int start, int reach)
+static void				r(t_asm *handle, t_arg *ar, int start, int reach)
 {
 	t_inst		*ins;
 	int			i;
@@ -46,7 +46,7 @@ static void				reverse_label(t_asm *handle, t_arg *ar, int start, int reach)
 	}
 }
 
-static void				set_label(t_asm *handle, t_arg *ar, int start, int reach)
+static void				se(t_asm *handle, t_arg *ar, int start, int reach)
 {
 	t_inst		*ins;
 	int			i;
@@ -62,7 +62,7 @@ static void				set_label(t_asm *handle, t_arg *ar, int start, int reach)
 	}
 }
 
-static void				fill_value(t_asm *handle, t_arg *ar, int where, int here)
+static void				fi(t_asm *handle, t_arg *ar, int where, int here)
 {
 	int		start;
 	int		reach;
@@ -73,13 +73,13 @@ static void				fill_value(t_asm *handle, t_arg *ar, int where, int here)
 	{
 		start = where;
 		reach = here;
-		reverse_label(handle, ar, start, reach);
+		r(handle, ar, start, reach);
 	}
 	else
 	{
 		start = here;
 		reach = where;
-		set_label(handle, ar, start, reach);
+		se(handle, ar, start, reach);
 	}
 }
 
@@ -97,7 +97,7 @@ void					change_label(t_asm *handle)
 		while (ar)
 		{
 			if (ar->label)
-				fill_value(handle, ar, find_label(handle, ar->label), here);
+				fi(handle, ar, find_label(handle, ar->label), here);
 			ar = ar->next;
 		}
 		here++;
