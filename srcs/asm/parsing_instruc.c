@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:45:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/22 13:05:56 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/22 13:51:22 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,10 +190,7 @@ int					parse_instruc(t_asm *handle, char *buf)
 		buf++;
 	i = check_name(handle, buf, new);
 	if (!i)
-	{
-		put_new_in_handle(handle, new);
-		return (0);
-	}
+		error_instruc(handle, buf);
 	buf += i;
 	while (*buf || *buf == COMMENT_CHAR)
 	{

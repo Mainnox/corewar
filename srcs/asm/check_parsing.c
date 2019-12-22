@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 18:42:37 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 04:56:18 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/22 13:45:59 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,24 @@ static void		check_inst_helper(t_asm *handle, t_inst *tmp, int i)
 			|| ft_strcmp(tmp->name, "zjmp") == 0
 			|| ft_strcmp(tmp->name, "lfork") == 0)
 		check_d(handle, tmp, i);
-	if (ft_strcmp(tmp->name, "ld") == 0
+	else if (ft_strcmp(tmp->name, "ld") == 0
 			|| ft_strcmp(tmp->name, "lld") == 0)
 		check_di_r(handle, tmp, i);
-	if (ft_strcmp(tmp->name, "add") == 0
+	else if (ft_strcmp(tmp->name, "add") == 0
 			|| ft_strcmp(tmp->name, "sub") == 0)
 		check_r_r_r(handle, tmp, i);
-	if (ft_strcmp(tmp->name, "st") == 0)
+	else if (ft_strcmp(tmp->name, "st") == 0)
 		check_r_ir(handle, tmp, i);
-	if (ft_strcmp(tmp->name, "and") == 0
+	else if (ft_strcmp(tmp->name, "and") == 0
 			|| ft_strcmp(tmp->name, "or") == 0
 			|| ft_strcmp(tmp->name, "xor") == 0)
 		check_rdi_rdi_r(handle, tmp, i);
-	if (ft_strcmp(tmp->name, "ldi") == 0
+	else if (ft_strcmp(tmp->name, "ldi") == 0
 			|| ft_strcmp(tmp->name, "lldi") == 0)
 		check_rdi_rd_r(handle, tmp, i);
-	if (ft_strcmp(tmp->name, "sti") == 0)
+	else if (ft_strcmp(tmp->name, "sti") == 0)
 		check_r_rdi_dr(handle, tmp, i);
-	if (ft_strcmp(tmp->name, "aff") == 0)
+	else if (ft_strcmp(tmp->name, "aff") == 0)
 		check_r(handle, tmp, i);
 }
 
