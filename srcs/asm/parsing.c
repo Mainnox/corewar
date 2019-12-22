@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:46:17 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 05:25:32 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/22 23:04:39 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,35 +69,42 @@ static int		parse_comment(t_asm *handle, char *buf)
 	return (1);
 }
 
+static void		parsing_helper(t_asm *handle, char *buf, char *tmp)
+{
+	if (handle->header.prog_name[0] == '\n' && ft_strncmp(
+				NAME_CMD_STRING, buf, ft_strlen(NAME_CMD_STRING)) == 0)
+	{
+		if (parse_name(handle, buf) && ft_strdel(&tmp))
+			error_name(handle);
+	}
+	else if (handle->header.comment[0] == '\n' && ft_strncmp(buf,
+				COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0)
+	{
+		if (parse_comment(handle, buf) && ft_strdel(&tmp))
+			error_comment(handle);
+	}
+	else
+	{
+		if (parse_instruc(handle, buf) && ft_strdel(&tmp))
+			error_instruc(handle, buf);
+	}
+}
+
 int				parsing(t_asm *handle)
 {
 	char		*buf;
+	char		*tmp;
 
 	while (get_next_line(handle->fd_read, &buf) > 0)
 	{
+		tmp = buf;
 		handle->count_line++;
 		if (check_blanc(buf) && ft_strdel(&buf))
 			continue ;
-		if (handle->header.prog_name[0] == '\n')
-		{
-			if (parse_name(handle, buf) && ft_strdel(&buf))
-				error_name(handle);
-			ft_strdel(&buf);
-			continue ;
-		}
-		if (handle->header.prog_name[0] != '\n'
-				&& handle->header.comment[0] == '\n')
-		{
-			if (parse_comment(handle, buf) && ft_strdel(&buf))
-				error_comment(handle);
-			ft_strdel(&buf);
-			continue ;
-		}
-		if (handle->header.prog_name[0] != '\n'
-				&& handle->header.comment[0] != '\n')
-			if (parse_instruc(handle, buf) && ft_strdel(&buf))
-				error_instruc(handle, buf);
-		ft_strdel(&buf);
+		while (*buf == ' ' || *buf == '\t')
+			buf++;
+		parsing_helper(handle, buf, tmp);
+		ft_strdel(&tmp);
 	}
 	return (1);
 }

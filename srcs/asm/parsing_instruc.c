@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:45:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/22 13:51:22 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/22 23:39:31 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,26 +172,12 @@ static int			avance_buf(char *buf)
 	return (i);
 }
 
-int					parse_instruc(t_asm *handle, char *buf)
+static void			parse_inst_helper(t_asm *handle, char *buf,
+		t_inst *new, char first)
 {
-	int		i;
-	t_inst	*new;
-	char	first;
+	int			i;
 
 	i = 0;
-	first = 0;
-	if (!(new = (t_inst*)ft_memalloc(sizeof(t_inst))))
-		error_malloc(handle);
-	ft_bzero(new, sizeof(t_inst));
-	while (ft_isblank(*buf))
-		buf++;
-	buf += check_label(buf, new);
-	while (ft_isblank(*buf))
-		buf++;
-	i = check_name(handle, buf, new);
-	if (!i)
-		error_instruc(handle, buf);
-	buf += i;
 	while (*buf || *buf == COMMENT_CHAR)
 	{
 		i = 0;
@@ -214,6 +200,29 @@ int					parse_instruc(t_asm *handle, char *buf)
 		buf += avance_buf(buf);
 		first = 1;
 	}
+}
+
+int					parse_instruc(t_asm *handle, char *buf)
+{
+	int		i;
+	t_inst	*new;
+	char	first;
+
+	i = 0;
+	first = 0;
+	if (!(new = (t_inst*)ft_memalloc(sizeof(t_inst))))
+		error_malloc(handle);
+	ft_bzero(new, sizeof(t_inst));
+	while (ft_isblank(*buf))
+		buf++;
+	buf += check_label(buf, new);
+	while (ft_isblank(*buf))
+		buf++;
+	i = check_name(handle, buf, new);
+	if (!i)
+		error_instruc(handle, buf);
+	buf += i;
+	parse_inst_helper(handle, buf, new, first);
 	put_new_in_handle(handle, new);
 	return (0);
 }

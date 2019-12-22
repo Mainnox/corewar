@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:01:35 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/22 13:29:09 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/22 18:31:43 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void			open_bar(t_asm *handle)
 	len_name_s = ft_strlen(handle->av);
 	handle->fd_read = open(handle->av, O_RDONLY);
 	if (handle->fd_read < 2)
+		error_open(handle);
+	if (handle->av[len_name_s - 2] != '.' || handle->av[len_name_s - 1] != 's')
 		error_open(handle);
 	handle->bin = ft_strdup(handle->av);
 	handle->bin[len_name_s - 1] = 'c';
