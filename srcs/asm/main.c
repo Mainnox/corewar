@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 05:03:20 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/22 13:29:54 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,25 @@ static void		init_handle(t_asm *handle, char *av)
 	handle->op_tab = gopt();
 }
 
+static void		all_good(t_asm *handle)
+{
+	char		*name;
+	char		*tmp;
+	size_t		len;
+
+	len = ft_strlen(handle->av) - 1;
+	name = ft_strdup(handle->av);
+	name[len - 1] = '\0';
+	tmp = name;
+	while (len && name[len] != '/')
+		len--;
+	name += len + 1;
+	ft_printf("LADIES AND GENTLEMANS !\n");
+	ft_printf("ARE YOU READY FOR OUR NEW CHALLENGER : %s !\n", name);
+	ft_printf("WAITING FOR A BLOODY FIGHT AT HIM NEW PLACE I NAMED : %s\n", handle->bin);
+	free(tmp);
+}
+
 int				main(int ac, char **av)
 {
 	t_asm		handle;
@@ -55,6 +74,7 @@ int				main(int ac, char **av)
 	fill_handle(&handle);
 	change_label(&handle);
 	print_cor(&handle);
+	all_good(&handle);
 	free_all(&handle);
 	return (0);
 }

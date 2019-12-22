@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:45:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 05:28:56 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/22 13:05:56 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,10 +163,8 @@ static int			avance_buf(char *buf)
 	if (buf[i] == LABEL_CHAR)
 	{
 		i++;
-		ft_printf("buf = %s\n", buf + i);
 		while (ft_strchr(LABEL_CHARS, buf[i]))
 			i++;
-	ft_printf("i = %d\n", i);
 		return (i);
 	}
 	while (buf[i] == '-' || buf[i] == '+' || (buf[i] >= '0' && buf[i] <= '9'))

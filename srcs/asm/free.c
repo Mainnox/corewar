@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 23:50:17 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/19 00:34:08 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/22 13:29:57 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,4 @@ void			free_all(t_asm *handle)
 		close(handle->fd_read);
 	if (handle->fd_write)
 		close(handle->fd_write);
-	system("leaks --list asm");
 }
