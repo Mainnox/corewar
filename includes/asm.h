@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/22 23:39:34 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/23 05:18:30 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,20 @@ typedef struct				s_inst
 	struct s_inst			*next;
 }							t_inst;
 
+typedef struct				s_helper
+{
+	char					*buf;
+	t_inst					*new;
+	int						j;
+}							t_helper;
+
 typedef struct 				s_asm
 {
 	char					odd;
 	char					size_magic;
 	char					size_prog_size;
 	char					zero;
+	char					code;
 	int						count_line;
 	int						fd_read;
 	int						fd_write;
@@ -95,6 +103,13 @@ void						check_rdi_rdi_r(t_asm *handle, t_inst *inst, int i);
 
 int							parsing(t_asm *handle);
 int							parse_instruc(t_asm *handle, char *buf);
+void						add_arg_helper_3(char *buf, t_arg *arg, int *j, int i);
+void						add_arg_helper_2(t_asm *handle, char *buf, t_arg *arg, int *j);
+void						add_arg_helper_1(t_asm *handle, t_inst *new, char *buf, t_arg *arg);
+void						put_arg_in_new(t_inst *new, t_arg *arg);
+int							check_label(char *buf, t_inst *new);
+int							check_name(t_asm *handle, char *buf, t_inst *new);
+void						put_new_in_handle(t_asm *handle, t_inst *new);
 
 /*
 ** 							print_functions

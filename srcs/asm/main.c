@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/22 13:51:27 by akremer          ###   ########.fr       */
+/*   Updated: 2019/12/23 05:20:58 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void		all_good(t_asm *handle)
 	name += len + 1;
 	ft_printf("LADIES AND GENTLEMANS !\n");
 	ft_printf("ARE YOU READY FOR OUR NEW CHALLENGER : %s !\n", name);
-	ft_printf("WAITING FOR A BLOODY FIGHT AT HIM NEW PLACE I NAMED : %s\n", handle->bin);
+	ft_printf("WAITING FOR A BLOODY FIGHT AT HIM NEW PLACE ");
+	ft_printf("I NAMED : %s\n", handle->bin);
 	free(tmp);
 }
 
