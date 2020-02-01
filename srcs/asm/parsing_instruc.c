@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 14:45:45 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/23 05:29:16 by akremer          ###   ########.fr       */
+/*   Updated: 2020/02/01 16:28:32 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void			add_arg(t_asm *handle, t_inst *new,
 	}
 	if (*buf == LABEL_CHAR)
 	{
-		add_arg_helper_3(buf, arg, j, i);
+		if (add_arg_helper_3(buf, arg, j, i))
+			error_label(handle, buf);
 		put_arg_in_new(new, arg);
 		return ;
 	}
@@ -50,6 +51,8 @@ static void			check_arg(t_asm *handle, char *buf, t_inst *new, int *i)
 	}
 	else if (*buf == LABEL_CHAR)
 	{
+		if (!ft_strchr(LABEL_CHARS, *buf + 1))
+			error_instruc(handle, buf);
 		handle->code = 2;
 		add_arg(handle, new, buf, i);
 	}
@@ -116,23 +119,26 @@ static void			parse_inst_helper(t_asm *handle, char *buf,
 	}
 }
 
-int					parse_instruc(t_asm *handle, char *buf)
+int					parse_instruc(t_asm *handle, char *buf, char first)
 {
 	int		i;
 	t_inst	*new;
-	char	first;
 
 	i = 0;
-	first = 0;
 	if (!(new = (t_inst*)ft_memalloc(sizeof(t_inst))))
 		error_malloc(handle);
 	ft_bzero(new, sizeof(t_inst));
 	while (ft_isblank(*buf))
 		buf++;
-	buf += check_label(buf, new);
+	buf += check_label(handle, buf, new);
 	while (ft_isblank(*buf))
 		buf++;
 	i = check_name(handle, buf, new);
+	if (new->label && check_blanc(buf))
+	{
+		put_new_in_handle(handle, new);
+		return (0);
+	}
 	if (!i)
 		error_instruc(handle, buf);
 	buf += i;

@@ -6,7 +6,7 @@
 #    By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 01:24:04 by lyhamrou          #+#    #+#              #
-#    Updated: 2019/12/23 05:29:42 by akremer          ###   ########.fr        #
+#    Updated: 2020/02/01 15:40:06 by akremer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_COR_PATH = srcs/corewar/
 SRC_ASM_NAME = main.c error.c parsing.c test.c print.c open.c parsing_instruc.c \
 			   check_parsing.c op.c change_label.c fill.c free.c swap.c error2.c \
 			   check_parsing2.c check_parsing3.c fill2.c parsing_instruc_1.c \
-			   parsing_instruc_2.c
+			   parsing_instruc_2.c error3.c
 SRC_COR_NAME = main.c init.c parsing.c
 SRC_ASM = $(addprefix $(SRC_ASM_PATH),$(SRC_ASM_NAME))
 SRC_COR = $(addprefix $(SRC_COR_PATH),$(SRC_COR_NAME))

@@ -6,7 +6,7 @@
 /*   By: lyhamrou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 01:56:00 by lyhamrou          #+#    #+#             */
-/*   Updated: 2019/12/23 05:29:38 by akremer          ###   ########.fr       */
+/*   Updated: 2020/02/01 16:27:38 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void						error_no_inst(t_asm *handle);
 void						error_too_much_arg(t_asm *handle, int nb_inst);
 void						error_wrong_arg(t_asm *handle, char nb_arg, int nb_inst);
 void						error_too_few_arg(t_asm *handle, int i);
+void						error_label(t_asm *handle, char *buf);
 
 /*
 **							check_functions
@@ -102,12 +103,13 @@ void						check_rdi_rdi_r(t_asm *handle, t_inst *inst, int i);
 */
 
 int							parsing(t_asm *handle);
-int							parse_instruc(t_asm *handle, char *buf);
-void						add_arg_helper_3(char *buf, t_arg *arg, int *j, int i);
+int							parse_instruc(t_asm *handle, char *buf, char first);
+char						add_arg_helper_3(char *buf,
+		t_arg *arg, int *j, int i);
 void						add_arg_helper_2(t_asm *handle, char *buf, t_arg *arg, int *j);
 void						add_arg_helper_1(t_asm *handle, t_inst *new, char *buf, t_arg *arg);
 void						put_arg_in_new(t_inst *new, t_arg *arg);
-int							check_label(char *buf, t_inst *new);
+int							check_label(t_asm *handle, char *buf, t_inst *new);
 int							check_name(t_asm *handle, char *buf, t_inst *new);
 void						put_new_in_handle(t_asm *handle, t_inst *new);
 

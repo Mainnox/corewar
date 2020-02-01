@@ -6,13 +6,13 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 05:11:40 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/23 05:29:37 by akremer          ###   ########.fr       */
+/*   Updated: 2020/02/01 16:26:29 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int				check_label(char *buf, t_inst *new)
+int				check_label(t_asm *handle, char *buf, t_inst *new)
 {
 	int			i;
 
@@ -21,6 +21,8 @@ int				check_label(char *buf, t_inst *new)
 		i++;
 	if (buf[i] == LABEL_CHAR)
 	{
+		if (i == 0)
+			error_label(handle, buf);
 		new->label = ft_strndup(buf, i);
 		return (i + 1);
 	}
@@ -63,15 +65,21 @@ void			add_arg_helper_1(t_asm *handle,
 	}
 }
 
-void			add_arg_helper_3(char *buf,
+char			add_arg_helper_3(char *buf,
 		t_arg *arg, int *j, int i)
 {
+	int check;
+
+	check = i;
 	buf++;
 	*j = *j + 1;
 	while (ft_strchr(LABEL_CHARS, buf[i]))
 		i++;
+	if (i == check)
+		return (1);
 	arg->label = ft_strndup(buf, i);
 	*j = *j + i;
+	return (0);
 }
 
 void			add_arg_helper_2(t_asm *handle,

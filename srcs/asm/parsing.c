@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:46:17 by akremer           #+#    #+#             */
-/*   Updated: 2019/12/22 23:04:39 by akremer          ###   ########.fr       */
+/*   Updated: 2020/02/01 16:28:10 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void		parsing_helper(t_asm *handle, char *buf, char *tmp)
 	}
 	else
 	{
-		if (parse_instruc(handle, buf) && ft_strdel(&tmp))
+		if (parse_instruc(handle, buf, 0) && ft_strdel(&tmp))
 			error_instruc(handle, buf);
 	}
 }
