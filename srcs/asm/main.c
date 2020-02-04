@@ -6,7 +6,7 @@
 /*   By: akremer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:08:42 by akremer           #+#    #+#             */
-/*   Updated: 2020/02/01 16:27:48 by akremer          ###   ########.fr       */
+/*   Updated: 2020/02/04 08:45:46 by akremer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void		init_handle(t_asm *handle, char *av)
 {
 	header_t		header;
 
+	ft_bzero(&header, sizeof(header_t));
 	header.prog_size = 0;
 	ft_bzero(header.prog_name, sizeof(header.prog_name));
 	header.prog_name[0] = '\n';

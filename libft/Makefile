@@ -6,7 +6,7 @@
 #    By: akremer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:38:05 by akremer           #+#    #+#              #
-#    Updated: 2019/12/02 23:30:15 by akremer          ###   ########.fr        #
+#    Updated: 2020/02/04 08:09:50 by akremer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,11 +119,13 @@ SRC =	ft_atoi.c				\
 
 OBJ = $(SRC:%.c=%.o)
 
-FLAGS = -g -Wall -Werror -Wextra -I
+HEADER = includes/libft.h includes/ft_printf.h includes/get_next_line.h
+
+CFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEADER)
 	@echo "Compilation:"
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
